@@ -1,0 +1,135 @@
+<div class="features-page">
+  <!-- Hero Section -->
+  <section class="features-hero container">
+    <div class="hero-content">
+      <h1 class="page-title">İşletmeniz İçin Her Şey Düşünüldü</h1>
+      <p class="page-subtitle">Sadece bir personel devam kontrol sistemi değil, uçtan uca entegre bir insan kaynakları operasyon merkezi.</p>
+    </div>
+    
+    <div class="hero-orbit">
+      <div class="orbit-container" [class.paused]="isOrbitPaused">
+        <div class="orbit-center">
+          <lucide-angular name="cpu" class="core-icon"></lucide-angular>
+          <div class="center-text">
+            <h4>{{ activeOrbitModule }}</h4>
+            <p>{{ orbitDesc }}</p>
+          </div>
+          <div class="core-glow"></div>
+        </div>
+        
+        <div class="orbit-ring ring-1"></div>
+        <div class="orbit-ring ring-2"></div>
+        <div class="orbit-ring ring-3"></div>
+        
+        <!-- Satellites -->
+        <ng-container *ngFor="let mod of orbitModules; let i = index">
+          <div class="satellite-wrapper" 
+               [ngClass]="'ring-size-' + mod.ring"
+               [style.animation-delay]="getDelay(mod.ring, i) + 's'"
+               [style.animation-duration]="getDuration(mod.ring) + 's'"
+               (mouseenter)="setOrbitModule(mod.name, mod.desc)" 
+               (mouseleave)="resetOrbit()">
+            <div class="satellite-content"
+                 [style.animation-delay]="getDelay(mod.ring, i) + 's'"
+                 [style.animation-duration]="getDuration(mod.ring) + 's'"
+                 [ngClass]="'content-ring-' + mod.ring"
+                 (click)="openOrbitFeature(mod.name)">
+              <lucide-angular [name]="mod.icon"></lucide-angular>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Search Section -->
+  <section class="controls-section container">
+    <div class="glass-panel controls-container">
+      
+      <!-- Categories -->
+      <div class="categories-scroll">
+        <button 
+          class="category-btn" 
+          [class.active]="selectedCategory === 'all'"
+          (click)="onCategorySelect('all')">
+          Tümü
+        </button>
+        <button 
+          *ngFor="let cat of categories()" 
+          class="category-btn"
+          [class.active]="selectedCategory === cat.slug"
+          (click)="onCategorySelect(cat.slug)">
+          <lucide-angular [name]="cat.icon" class="btn-icon"></lucide-angular>
+          {{ cat.name }}
+        </button>
+      </div>
+
+      <!-- Search -->
+      <div class="search-box">
+        <lucide-angular name="search" class="search-icon"></lucide-angular>
+        <input 
+          type="text" 
+          placeholder="Özelliklerde ara..." 
+          [value]="searchQuery" 
+          (input)="onSearch($event)" />
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Grid Section -->
+  <section class="grid-section container">
+    
+    <div *ngIf="features().length === 0" class="empty-state">
+      <lucide-angular name="search-x" class="empty-icon"></lucide-angular>
+      <h3>Sonuç Bulunamadı</h3>
+      <p>Arama kriterlerinize uygun bir modül bulunamadı. Lütfen başka bir kelime ile tekrar deneyin.</p>
+      <button class="btn btn-outline" (click)="onCategorySelect('all'); searchQuery=''">Filtreleri Temizle</button>
+    </div>
+
+    <ng-container *ngFor="let group of groupedFeatures(); let i = index">
+      <!-- Category Header -->
+      <div class="category-group-header" [style.marginTop]="i === 0 ? '0' : '4rem'">
+        <div class="category-icon-wrapper" [style.color]="group.category.colorHex" [style.backgroundColor]="group.category.colorHex + '20'">
+          <lucide-angular [name]="group.category.icon"></lucide-angular>
+        </div>
+        <h2 class="category-group-title">{{ group.category.name }}</h2>
+        <div class="category-divider"></div>
+      </div>
+
+      <div class="bento-container modules-grid">
+        <div 
+          *ngFor="let feat of group.features" 
+          class="module-card bento-item glass-panel hover-lift" 
+          (click)="openFeature(feat)"
+          [id]="feat.slug">
+          
+          <div class="feature-header">
+            <div class="feature-icon-wrapper" [style.color]="group.category.colorHex" [style.backgroundColor]="group.category.colorHex + '20'">
+              <lucide-angular [name]="feat.icon"></lucide-angular>
+            </div>
+            <button class="details-btn" aria-label="Detay">
+              <lucide-angular name="arrow-up-right"></lucide-angular>
+            </button>
+          </div>
+          
+          <h3 class="feature-title">{{ feat.title }}</h3>
+          <p class="feature-desc">{{ feat.shortDescription }}</p>
+          
+          <div class="feature-tags" *ngIf="feat.tags && feat.tags.length">
+            <span class="tag">{{ feat.tags[0] }}</span>
+            <span class="tag" *ngIf="feat.tags.length > 1">+{{ feat.tags.length - 1 }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </section>
+
+
+</div>
+
+<app-feature-detail-modal 
+  [feature]="selectedFeature" 
+  [isOpen]="isModalOpen" 
+  (closeModal)="closeModal()">
+</app-feature-detail-modal>

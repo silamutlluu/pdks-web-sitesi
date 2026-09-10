@@ -1,0 +1,682 @@
+<div class="home-page">
+  
+  <!-- Hero Section -->
+  <section class="hero-section animate-fade-in-up">
+    <div class="hero-container bento-container">
+      
+      <!-- Sol Kolon -->
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Sahadan Ofise Uçtan Uca Personel Takibi:<br/>
+          <span class="typing-text highlight-gradient">{{ currentTypingWord }}</span><br/>
+          Tek Panelden Yönetin.
+        </h1>
+        
+        <div class="hero-ctas">
+          <button routerLink="/contact" class="btn btn-primary hover-lift">
+            Ürün Tanıtımı İsteyin
+          </button>
+        </div>
+        
+        <div class="trust-note">
+          <a routerLink="/security" class="trust-item clickable-badge kvkk-badge" style="display: inline-flex; align-items: center; gap: 0.5rem; line-height: 1;">
+            <lucide-angular name="shield-check" class="trust-icon" style="display: flex; align-items: center; justify-content: center; margin-bottom: 1px;"></lucide-angular>
+            <span>%100 KVKK Uyumlu</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Sağ Kolon -->
+      <div class="hero-visual">
+        <div class="live-feed-mockup hover-lift">
+          <div class="mockup-header">
+            <div class="header-left">
+              <lucide-angular name="activity" class="pulse-icon"></lucide-angular>
+              <span>Canlı Sistem Akışı</span>
+            </div>
+            <div class="live-indicator">
+              <span class="pulse-dot"></span> Canlı
+            </div>
+          </div>
+          <div class="mockup-body">
+            <div class="feed-event" *ngFor="let event of liveFeed" [ngClass]="event.type">
+              <div class="event-icon">
+                <lucide-angular [name]="event.icon"></lucide-angular>
+              </div>
+              <div class="event-details">
+                <div class="event-header">
+                  <span class="user-name">{{ event.user }}</span>
+                  <span class="time">{{ event.time }}</span>
+                </div>
+                <span class="action-text">{{ event.action }}</span>
+              </div>
+            </div>
+            <div class="feed-event placeholder" *ngIf="liveFeed.length === 0">
+              <div class="event-details">
+                <span class="action-text" style="color: #64748b;">Bağlantı bekleniyor...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Social Proof Bar -->
+  <section class="social-proof">
+    <div class="container">
+      <p>Sektörünün lider kurumları tarafından güvenle kullanılıyor</p>
+      <div class="logos">
+        <!-- TODO: gerçek referans logoları ile değiştirilecek -->
+        <div class="logo-placeholder glass-panel"><lucide-angular name="building-2"></lucide-angular> <span>Kurum A</span></div>
+        <div class="logo-placeholder glass-panel"><lucide-angular name="building-2"></lucide-angular> <span>Şirket B</span></div>
+        <div class="logo-placeholder glass-panel"><lucide-angular name="building-2"></lucide-angular> <span>Holding C</span></div>
+        <div class="logo-placeholder glass-panel"><lucide-angular name="building-2"></lucide-angular> <span>Fabrika D</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Proposition Metrics -->
+  <section class="metrics-section bento-container">
+    <div class="metric-card bento-item glass-panel hover-lift">
+      <p class="metric-desc">Daha az puantaj hatası</p>
+    </div>
+    <div class="metric-card bento-item glass-panel hover-lift">
+      <p class="metric-desc">Haftalık zaman tasarrufu</p>
+    </div>
+    <div class="metric-card bento-item glass-panel hover-lift">
+      <p class="metric-desc">Tüm ERP'lerle uyumlu data üretimi</p>
+    </div>
+  </section>
+
+  <!-- Solution Quiz Section -->
+  <section class="quiz-section container animate-fade-in-up">
+    <div class="quiz-header text-center">
+      <h2 class="section-title">3 Soruda İşletmenize En Uygun Çözümü Bulun</h2>
+      <p class="section-subtitle">Personel sayınızı, çalışma ortamınızı ve giriş tercihinizi seçin; sistem anında en ideal paket ve donanım kombinasyonunu önersin.</p>
+    </div>
+
+    <div class="quiz-wrapper glass-panel">
+      <!-- Sol Taraf: Sorular -->
+      <div class="quiz-questions">
+        
+        <!-- Soru 1 -->
+        <div class="quiz-group">
+          <label class="group-title"><lucide-angular name="users" class="group-icon"></lucide-angular> 1. Kaç çalışanınız var?</label>
+          <div class="quiz-options">
+            <button class="quiz-opt-btn" [class.selected]="quizEmployees === '1-50'" (click)="quizEmployees = '1-50'">
+              <span class="opt-label">1 - 50 Çalışan</span>
+              <span class="opt-sub">Küçük Ekip</span>
+            </button>
+            <button class="quiz-opt-btn" [class.selected]="quizEmployees === '51-250'" (click)="quizEmployees = '51-250'">
+              <span class="opt-label">51 - 250 Çalışan</span>
+              <span class="opt-sub">Orta Ölçekli</span>
+            </button>
+            <button class="quiz-opt-btn" [class.selected]="quizEmployees === '250+'" (click)="quizEmployees = '250+'">
+              <span class="opt-label">250+ Çalışan</span>
+              <span class="opt-sub">Büyük Kurum</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Soru 2 -->
+        <div class="quiz-group">
+          <label class="group-title"><lucide-angular name="building-2" class="group-icon"></lucide-angular> 2. Çalışma ortamınız nasıl?</label>
+          <div class="quiz-options">
+            <button class="quiz-opt-btn" [class.selected]="quizEnvironment === 'factory'" (click)="quizEnvironment = 'factory'">
+              <span class="opt-label">Vardiyalı Fabrika</span>
+              <span class="opt-sub">Tesis / Üretim</span>
+            </button>
+            <button class="quiz-opt-btn" [class.selected]="quizEnvironment === 'site'" (click)="quizEnvironment = 'site'">
+              <span class="opt-label">Saha / Şantiye</span>
+              <span class="opt-sub">Mobil / Hibrit</span>
+            </button>
+            <button class="quiz-opt-btn" [class.selected]="quizEnvironment === 'office'" (click)="quizEnvironment = 'office'">
+              <span class="opt-label">Kurumsal Ofis</span>
+              <span class="opt-sub">Merkez / Şube</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Soru 3 -->
+        <div class="quiz-group">
+          <label class="group-title"><lucide-angular name="shield-check" class="group-icon"></lucide-angular> 3. Giriş yöntemi tercihiniz?</label>
+          <div class="quiz-options">
+            <button class="quiz-opt-btn" [class.selected]="quizMethod === 'face'" (click)="quizMethod = 'face'">
+              <span class="opt-label">Yüz Tanıma</span>
+              <span class="opt-sub">0.2 sn Biyometrik</span>
+            </button>
+            <button class="quiz-opt-btn" [class.selected]="quizMethod === 'mobile'" (click)="quizMethod = 'mobile'">
+              <span class="opt-label">Mobil QR & GPS</span>
+              <span class="opt-sub">Cihaz Gerektirmez</span>
+            </button>
+            <button class="quiz-opt-btn" [class.selected]="quizMethod === 'turnstile'" (click)="quizMethod = 'turnstile'">
+              <span class="opt-label">Kartlı Turnike</span>
+              <span class="opt-sub">Fiziki Geçiş</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sağ Taraf: Canlı Öneri Kartı -->
+      <div class="quiz-result-card">
+        <div class="result-badge">{{ quizResult.packageBadge }}</div>
+        
+        <div class="result-header">
+          <span class="rec-tag">Size Özel Önerilen Paket</span>
+          <h3 class="package-name">{{ quizResult.packageName }} Paketi</h3>
+          <div class="emp-tag">{{ quizResult.employeeCount }}</div>
+        </div>
+
+        <div class="result-hardware">
+          <div class="hw-icon-box">
+            <lucide-angular [name]="quizResult.hardwareIcon"></lucide-angular>
+          </div>
+          <div class="hw-info">
+            <strong>{{ quizResult.hardwareName }}</strong>
+            <p>{{ quizResult.hardwareDetail }}</p>
+          </div>
+        </div>
+
+        <div class="result-env-note">
+          <lucide-angular name="info" class="note-icon"></lucide-angular>
+          <span>{{ quizResult.envNote }}</span>
+        </div>
+
+        <div class="result-features">
+          <div class="feat-item" *ngFor="let feat of quizResult.features">
+            <lucide-angular name="check-circle-2" class="check-icon"></lucide-angular>
+            <span>{{ feat }}</span>
+          </div>
+        </div>
+
+        <div class="result-actions">
+          <a routerLink="/pricing" class="btn btn-primary w-100 hover-lift">
+            Bu Paket İle İnceleyin <lucide-angular name="arrow-right"></lucide-angular>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Module Explorer -->
+  <section id="features" class="module-explorer container" (mouseenter)="onTabHover(true)" (mouseleave)="onTabHover(false)">
+    <h2 class="section-title text-center">Tek Bir Noktadan İzin, Vardiya ve Puantaj Yönetimi</h2>
+    
+    <!-- Tab Butonları -->
+    <div class="tabs">
+      <button 
+        *ngFor="let tab of tabs" 
+        class="tab-btn" 
+        [class.active]="activeTabId === tab.id"
+        (click)="setActiveTab(tab.id, true)">
+        <lucide-angular [name]="tab.icon" class="tab-btn-icon"></lucide-angular>
+        <span>{{ tab.title }}</span>
+      </button>
+    </div>
+    
+    <ng-container *ngFor="let tab of tabs">
+      <div class="tab-content glass-panel animate-fade-in-up" *ngIf="activeTabId === tab.id">
+        <div class="tab-inner">
+          
+          <!-- Sol Kolon: Metin & İkonlu Özellik Listesi -->
+          <div class="tab-text-col">
+            <div class="tab-header-badge">
+              <lucide-angular [name]="tab.icon" class="tab-badge-icon"></lucide-angular>
+              <span>{{ tab.title }} Modülü</span>
+            </div>
+            <h3>{{ tab.title }} ile Tam Denetim</h3>
+            <p>{{ tab.desc }}</p>
+
+            <!-- Modüle Özel İkonlu Maddeler -->
+            <ul class="module-features-list">
+              <ng-container *ngIf="tab.id === 'mobil'">
+                <li><lucide-angular name="map-pin" class="m-feat-icon"></lucide-angular> <span>GPS Konum Kısıtlaması & Doğrulama</span></li>
+                <li><lucide-angular name="qr-code" class="m-feat-icon"></lucide-angular> <span>Dinamik QR Kod Geçiş Altyapısı</span></li>
+                <li><lucide-angular name="bell-ring" class="m-feat-icon"></lucide-angular> <span>Anlık Push Bildirimi & İzin Talebi</span></li>
+              </ng-container>
+
+              <ng-container *ngIf="tab.id === 'biyometrik'">
+                <li><lucide-angular name="scan-face" class="m-feat-icon"></lucide-angular> <span>0.18 Saniye Yüksek Hızlı Yüz Tanıma</span></li>
+                <li><lucide-angular name="fingerprint" class="m-feat-icon"></lucide-angular> <span>Biyometrik Parmak İzi & Kartlı Turnike</span></li>
+                <li><lucide-angular name="wifi-off" class="m-feat-icon"></lucide-angular> <span>İnternet Kesintisinde Dahili Tampon Bellek</span></li>
+              </ng-container>
+
+              <ng-container *ngIf="tab.id === 'vardiya'">
+                <li><lucide-angular name="calendar-clock" class="m-feat-icon"></lucide-angular> <span>3 Vardiyalı Karmaşık Rotasyon Desteği</span></li>
+                <li><lucide-angular name="calculator" class="m-feat-icon"></lucide-angular> <span>Otomatik Fazla Mesai & Puantaj Hesabı</span></li>
+                <li><lucide-angular name="file-badge-2" class="m-feat-icon"></lucide-angular> <span>ERP / İK Sistemlerine Tek Tıkla Aktarım</span></li>
+              </ng-container>
+            </ul>
+
+            <a [routerLink]="tab.link" class="btn btn-primary mt-3 hover-lift">
+              {{ tab.linkText }} <lucide-angular name="arrow-right" class="btn-icon"></lucide-angular>
+            </a>
+          </div>
+
+          <!-- Sağ Kolon: Dinamik İnteraktif Mockup Yapıları -->
+          <div class="tab-img-col">
+
+            <!-- 1. MOBİL UYGULAMA DİNAMİK MOCKUP -->
+            <div *ngIf="tab.id === 'mobil'" class="dynamic-mockup mobile-dynamic-card">
+              <div class="phone-frame">
+                <div class="phone-speaker"></div>
+                <div class="phone-screen">
+                  
+                  <div class="app-status-bar">
+                    <span class="time">09:41</span>
+                    <div class="signal-icons">
+                      <lucide-angular name="wifi" class="mini-icon"></lucide-angular>
+                      <lucide-angular name="battery-charging" class="mini-icon"></lucide-angular>
+                    </div>
+                  </div>
+
+                  <div class="app-header">
+                    <div class="user-avatar-box">
+                      <lucide-angular name="user-check" class="app-user-avatar"></lucide-angular>
+                    </div>
+                    <div class="app-user-text">
+                      <strong>Ahmet Yılmaz</strong>
+                      <span>Saha Personeli — Saha A</span>
+                    </div>
+                  </div>
+
+                  <div class="gps-badge-box">
+                    <lucide-angular name="map-pin" class="pulse-gps-icon"></lucide-angular>
+                    <div class="gps-text">
+                      <strong class="green-text">GPS Konumu Doğrulandı</strong>
+                      <span>Maslak Şantiyesi (Sapma: 2m)</span>
+                    </div>
+                  </div>
+
+                  <div class="qr-preview-box">
+                    <lucide-angular name="qr-code" class="qr-large-icon"></lucide-angular>
+                    <span class="qr-scan-line"></span>
+                    <span class="qr-hint">Turnikeye Okutun</span>
+                  </div>
+
+                  <div class="recent-checkin-toast">
+                    <lucide-angular name="check-circle-2" class="check-toast-icon"></lucide-angular>
+                    <span>Mesai Başlangıcı: 08:30:15</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. BİYOMETRİK ENTEGRASYON DİNAMİK MOCKUP -->
+            <div *ngIf="tab.id === 'biyometrik'" class="dynamic-mockup biometric-dynamic-card">
+              <div class="scanner-frame">
+                
+                <div class="scanner-top">
+                  <div class="status-pill">
+                    <span class="live-dot"></span> Megvii M3 — Bağlantı Aktif
+                  </div>
+                  <lucide-angular name="shield-check" class="shield-badge-icon"></lucide-angular>
+                </div>
+
+                <div class="biometric-target-zone">
+                  <div class="scan-overlay-corners"></div>
+                  <lucide-angular name="scan-face" class="face-scan-icon"></lucide-angular>
+                  <div class="scan-laser-line"></div>
+                  <div class="match-score-badge">Match: %99.8 (0.18 sn)</div>
+                </div>
+
+                <div class="biometric-stats-grid">
+                  <div class="b-stat">
+                    <lucide-angular name="cpu" class="b-icon"></lucide-angular>
+                    <div class="b-txt"><strong>AI Çip</strong><span>Cihaz Üstü Doğrulama</span></div>
+                  </div>
+                  <div class="b-stat">
+                    <lucide-angular name="database" class="b-icon"></lucide-angular>
+                    <div class="b-txt"><strong>50.000</strong><span>Yüz Şablon Hafızası</span></div>
+                  </div>
+                </div>
+
+                <div class="recent-logs">
+                  <div class="log-row">
+                    <lucide-angular name="user-check" class="log-icon"></lucide-angular>
+                    <span class="log-name">Ayşe Demir</span>
+                    <span class="log-time">08:29:40</span>
+                    <span class="log-status pass">Onaylandı</span>
+                  </div>
+                  <div class="log-row">
+                    <lucide-angular name="user-check" class="log-icon"></lucide-angular>
+                    <span class="log-name">Mehmet Can</span>
+                    <span class="log-time">08:30:02</span>
+                    <span class="log-status pass">Onaylandı</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- 3. VARDİYA YÖNETİMİ DİNAMİK MOCKUP -->
+            <div *ngIf="tab.id === 'vardiya'" class="dynamic-mockup shift-dynamic-card">
+              <div class="dashboard-frame">
+                
+                <div class="dash-header">
+                  <div class="dash-title">
+                    <lucide-angular name="calendar-clock" class="d-icon"></lucide-angular>
+                    <span>Vardiya & Rotasyon Planı</span>
+                  </div>
+                  <span class="week-pill">Bu Hafta</span>
+                </div>
+
+                <div class="shifts-list">
+                  
+                  <!-- Vardiya 1 -->
+                  <div class="shift-card-item s-gunduz">
+                    <div class="s-left">
+                      <lucide-angular name="sun" class="s-icon text-amber"></lucide-angular>
+                      <div class="s-details">
+                        <strong>Gündüz Vardiyası</strong>
+                        <span>08:00 — 16:00</span>
+                      </div>
+                    </div>
+                    <div class="s-right">
+                      <span class="badge s-count">48 Personel</span>
+                    </div>
+                  </div>
+
+                  <!-- Vardiya 2 -->
+                  <div class="shift-card-item s-aksam">
+                    <div class="s-left">
+                      <lucide-angular name="sunset" class="s-icon text-indigo"></lucide-angular>
+                      <div class="s-details">
+                        <strong>Akşam Vardiyası</strong>
+                        <span>16:00 — 00:00</span>
+                      </div>
+                    </div>
+                    <div class="s-right">
+                      <span class="badge s-count-blue">32 Personel</span>
+                    </div>
+                  </div>
+
+                  <!-- Vardiya 3 -->
+                  <div class="shift-card-item s-gece">
+                    <div class="s-left">
+                      <lucide-angular name="moon" class="s-icon text-purple"></lucide-angular>
+                      <div class="s-details">
+                        <strong>Gece Vardiyası</strong>
+                        <span>00:00 — 08:00</span>
+                      </div>
+                    </div>
+                    <div class="s-right">
+                      <span class="badge s-count-purple">16 Personel</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="shift-summary-bar">
+                  <div class="sum-item">
+                    <lucide-angular name="check-circle-2" class="sum-icon text-emerald"></lucide-angular>
+                    <span>Vardiya Çakışması: 0</span>
+                  </div>
+                  <div class="sum-item">
+                    <lucide-angular name="clock" class="sum-icon text-blue"></lucide-angular>
+                    <span>Otomatik Mesai Hesabı</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        
+        <!-- Carousel Dots -->
+        <div class="carousel-dots" style="margin-top: 2rem; padding-bottom: 0.5rem;">
+          <span *ngFor="let dotTab of tabs" 
+                class="dot" 
+                [class.active]="activeTabId === dotTab.id"
+                (click)="setActiveTab(dotTab.id, true)"></span>
+        </div>
+      </div>
+    </ng-container>
+  </section>
+
+
+
+  <!-- Stacking Cards: Neden Smart PDKS? -->
+  <section class="stacking-section container">
+    <h2 class="section-title text-center">Neden Smart PDKS?</h2>
+    <p class="section-subtitle" style="text-align: center; margin-bottom: 3rem; color: #64748b;">
+      Geleneksel sistemlerin ötesinde, modern işletmeler için tasarlanmış 3 temel güç.
+    </p>
+
+    <div class="stacking-cards-container">
+      
+      <!-- Kart 1 -->
+      <div class="stacking-card glass-panel card-1">
+        <div class="card-header-bar">
+          <span class="card-badge">01. Operasyonel Güç</span>
+          <h3>7/24 Kesintisiz Takip & Otomasyon</h3>
+        </div>
+        <div class="card-body-content">
+          <div class="card-text">
+            <p>Fabrika, şantiye veya ofis... Biyometrik turnikelerden mobil QR/NFC doğrulamaya kadar tüm lokasyonlardaki hareketler anlık işlenir. Vardiya çakışmaları ve eksik mesailer otomatik tespit edilir.</p>
+            <ul class="card-features">
+              <li><lucide-angular name="check-circle-2"></lucide-angular> 3 Vardiyalı Karmaşık Rotasyon Desteği</li>
+              <li><lucide-angular name="check-circle-2"></lucide-angular> Anlık Kesintisiz Veri Senkronizasyonu</li>
+            </ul>
+          </div>
+          <div class="card-visual visual-1">
+            <lucide-angular name="activity" class="card-bg-icon"></lucide-angular>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kart 2 -->
+      <div class="stacking-card glass-panel card-2">
+        <div class="card-header-bar">
+          <span class="card-badge">02. Güvenlik & Uyum</span>
+          <h3>%100 KVKK Uyumlu & Güvenli Bulut Altyapı</h3>
+        </div>
+        <div class="card-body-content">
+          <div class="card-text">
+            <p>Hassas personel verileriniz ve biyometrik kayıtlarınız ISO 27001 sertifikalı şifreli sunucularda saklanır. Kanuni yükümlülüklere %100 uyumlu altyapı sayesinde ceza riskleri tamamen önlenir.</p>
+            <ul class="card-features">
+              <li><lucide-angular name="check-circle-2"></lucide-angular> End-to-End Şifreli Veri Depolama</li>
+              <li><lucide-angular name="check-circle-2"></lucide-angular> Otomatik Günlük Yedekleme Mimarisi</li>
+            </ul>
+          </div>
+          <div class="card-visual visual-2">
+            <lucide-angular name="shield-check" class="card-bg-icon"></lucide-angular>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kart 3 -->
+      <div class="stacking-card glass-panel card-3">
+        <div class="card-header-bar">
+          <span class="card-badge">03. Verimlilik</span>
+          <h3>Tek Tıkla Bordro & Puantaj Raporlama</h3>
+        </div>
+        <div class="card-body-content">
+          <div class="card-text">
+            <p>Ay sonu günlerce süren puantaj ve mesai hesaplama çilesine son verin. Tüm popüler ERP ve İK yazılımlarıyla (Logo, Zirve, Mikro vb.) tek tıkla entegre çalışan raporlama motoru.</p>
+            <ul class="card-features">
+              <li><lucide-angular name="check-circle-2"></lucide-angular> ERP / İK Yazılımlarına Tek Tıkla Aktarım</li>
+              <li><lucide-angular name="check-circle-2"></lucide-angular> %99.9 Hata Payından Arındırılmış Bütçeleme</li>
+            </ul>
+          </div>
+          <div class="card-visual visual-3">
+            <lucide-angular name="file-spreadsheet" class="card-bg-icon"></lucide-angular>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="comparison-section container animate-fade-in-up">
+    <h2 class="section-title">Canlı Karşılaştırma</h2>
+    <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem; color: #64748b;">Eski sisteminiz ile Smart PDKS arasındaki farkı kendiniz deneyimleyin.</p>
+    
+    <!-- BEFORE/AFTER SLIDER -->
+    <div class="before-after-container">
+      <div class="ba-slider-wrapper">
+        <!-- Eski Sistem (Before) -->
+        <div class="ba-layer ba-before">
+          <div class="ba-content">
+            <div class="ba-badge old-badge">Eski Usül PDKS</div>
+            <div class="mock-excel">
+              <div class="excel-header">
+                <span>Personel</span><span>Giriş</span><span>Çıkış</span><span>Durum</span>
+              </div>
+              <div class="excel-row"><span>Ahmet Yılmaz</span><span>08:15</span><span>19:00</span><span class="err">#DEĞER!</span></div>
+              <div class="excel-row"><span>Mehmet Can</span><span>09:20</span><span>-</span><span class="err">Hata</span></div>
+              <div class="excel-row"><span>Ayşe Demir</span><span>-</span><span>17:30</span><span class="err">Eksik Gün</span></div>
+              <div class="excel-row"><span>Zeynep Kaya</span><span>08:00</span><span>18:00</span><span>Onay Bekliyor</span></div>
+            </div>
+            <div class="messy-papers">
+              <lucide-angular name="file-spreadsheet" class="paper-icon"></lucide-angular>
+              <span>Manuel hesaplamalar, yavaş donanımlar ve hata riski...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Smart PDKS (After) -->
+        <div class="ba-layer ba-after" [style.clip-path]="'inset(0 0 0 ' + sliderPosition + '%)'">
+          <div class="ba-content">
+            <div class="ba-badge new-badge">Smart PDKS</div>
+            <div class="mock-dashboard">
+              <div class="dash-top">
+                <div class="dash-stat">
+                  <lucide-angular name="file-check-2" class="success-icon"></lucide-angular>
+                  <div class="stat-text"><strong>Hatasız Süreç</strong><span>Otomatik Puantaj</span></div>
+                </div>
+                <div class="dash-stat">
+                  <lucide-angular name="refresh-cw" class="info-icon"></lucide-angular>
+                  <div class="stat-text"><strong>Anında Senkron</strong><span>Kesintisiz ERP Aktarımı</span></div>
+                </div>
+              </div>
+              <div class="dash-chart-area">
+                <div class="bars">
+                  <div class="chart-bar"><div class="fill" style="height: 100%;"></div></div>
+                  <div class="chart-bar"><div class="fill" style="height: 80%;"></div></div>
+                  <div class="chart-bar"><div class="fill" style="height: 90%;"></div></div>
+                  <div class="chart-bar"><div class="fill" style="height: 100%;"></div></div>
+                  <div class="chart-bar"><div class="fill" style="height: 95%;"></div></div>
+                </div>
+                <div class="chart-line">
+                  <lucide-angular name="activity" class="pulse-icon-small"></lucide-angular> Canlı Veri Akışı Aktif
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slider Control -->
+        <input 
+          id="ba-slider-input"
+          name="baSliderInput"
+          type="range" 
+          min="0" 
+          max="100" 
+          [value]="sliderPosition" 
+          (input)="updateSlider($event)" 
+          class="ba-slider-input" 
+          aria-label="Canlı Karşılaştırma Sürgüsü" />
+        <div class="ba-slider-line" [style.left.%]="sliderPosition">
+          <div class="ba-slider-handle">
+            <lucide-angular name="split-square-horizontal"></lucide-angular>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comparison-table-wrapper glass-panel" style="margin-top: 4rem;">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th class="feature-col">Özellikler</th>
+            <th class="competitor-col">Geleneksel PDKS'ler</th>
+            <th class="smart-col"><div class="smart-badge">Smart PDKS</div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-col">Kurulum Süreci</td>
+            <td class="competitor-col">Günler süren kablolama ve donanım kurulumu</td>
+            <td class="smart-col"><lucide-angular name="check" class="icon-success"></lucide-angular> 5 Dakikada Tak-Çalıştır</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Yazılım Altyapısı</td>
+            <td class="competitor-col">Sadece yerel bilgisayarda çalışan eski programlar</td>
+            <td class="smart-col"><lucide-angular name="check" class="icon-success"></lucide-angular> %100 Bulut ve Web Tabanlı Yönetim</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Mobil Kullanım ve GPS</td>
+            <td class="competitor-col"><lucide-angular name="x" class="icon-fail"></lucide-angular> Desteklenmez</td>
+            <td class="smart-col"><lucide-angular name="check" class="icon-success"></lucide-angular> iOS & Android, Konum ve QR Doğrulama</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Esnek Vardiya ve Puantaj</td>
+            <td class="competitor-col">Manuel müdahale gerektiren karmaşık cetveller</td>
+            <td class="smart-col"><lucide-angular name="check" class="icon-success"></lucide-angular> AI destekli otomatik rotasyon ve hata tespiti</td>
+          </tr>
+          <tr>
+            <td class="feature-col">ERP / İK Entegrasyonu</td>
+            <td class="competitor-col"><lucide-angular name="x" class="icon-fail"></lucide-angular> Genelde kapalı sistem</td>
+            <td class="smart-col"><lucide-angular name="check" class="icon-success"></lucide-angular> Tüm popüler ERP yazılımlarıyla API entegrasyonu</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section container" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="faq-header">
+      <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+      
+      <!-- Live Search Input -->
+      <div class="faq-search-box glass-panel">
+        <label for="faq-search-input" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Sık sorulan sorularda arayın</label>
+        <lucide-angular name="search" class="search-icon"></lucide-angular>
+        <input 
+          id="faq-search-input"
+          name="faqSearchInput"
+          type="text" 
+          [(ngModel)]="searchQuery" 
+          placeholder="Soru veya kelime arayın..." 
+          class="faq-search-input"
+          aria-label="Soru veya kelime arayın" />
+      </div>
+    </div>
+
+    <div class="faq-list">
+      <ng-container *ngIf="filteredFaqs.length > 0; else noResults">
+        <div class="faq-item glass-panel accordion-item" 
+             *ngFor="let faq of filteredFaqs; let i = index" 
+             [class.active]="activeFaqIndex === i" 
+             itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <h4 class="accordion-header" itemprop="name" (click)="toggleFaq(i)">
+            {{ faq.question }}
+            <lucide-angular [name]="activeFaqIndex === i ? 'chevron-up' : 'chevron-down'"></lucide-angular>
+          </h4>
+          <div class="faq-answer accordion-body" *ngIf="activeFaqIndex === i" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text" [innerHTML]="faq.answer"></p>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #noResults>
+        <div class="no-faq-results glass-panel">
+          <lucide-angular name="frown" class="no-results-icon"></lucide-angular>
+          <p><strong>"{{ searchQuery }}"</strong> ile eşleşen bir soru bulamadık.</p>
+          <p class="text-sm">Farklı kelimelerle tekrar aramayı deneyebilirsiniz.</p>
+        </div>
+      </ng-template>
+    </div>
+  </section>
+  
+</div>

@@ -1,0 +1,52 @@
+@import '../../../styles/variables';
+
+.footer {
+  background-color: $color-bg-dark-card;
+  color: $color-text-inverse;
+  padding: 4rem 0 0;
+  margin-top: 4rem;
+}
+
+.footer-container {
+  max-width: 1536px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  p {
+    color: $color-text-muted;
+    margin-top: 1rem;
+  }
+  
+  h4 {
+    margin-bottom: 1rem;
+    font-weight: $font-weight-semibold;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    
+    li {
+      margin-bottom: 0.5rem;
+      
+      a {
+        color: $color-text-muted;
+        text-decoration: none;
+        transition: color $transition-fast;
+        
+        &:hover {
+          color: $color-accent-primary;
+        }
+      }
+    }
+  }
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid $color-border;
+  margin-top: 2rem;
+  color: $color-text-muted;
+}

@@ -1,0 +1,64 @@
+<div class="mobile-nav-overlay" [class.open]="isOpen" (click)="closeNav()"></div>
+<div class="mobile-nav-panel glass-panel" [class.open]="isOpen">
+  <div class="nav-header">
+    <span class="logo-text">Smart PDKS</span>
+    <button class="close-btn" (click)="closeNav()">
+      <lucide-angular name="x"></lucide-angular>
+    </button>
+  </div>
+  
+  <nav class="nav-links">
+    <ul>
+      <li class="mobile-accordion-item">
+        <a href="#" class="nav-link accordion-header" (click)="toggleFeaturesAccordion($event)" [class.active]="isFeaturesAccordionOpen">
+          Özellikler
+          <lucide-angular [name]="isFeaturesAccordionOpen ? 'chevron-up' : 'chevron-down'" style="width: 18px; height: 18px;"></lucide-angular>
+        </a>
+        <div class="accordion-body" [class.open]="isFeaturesAccordionOpen">
+          <a routerLink="/features" (click)="closeNav()" class="overview-link">
+            Özellikler Ana Sayfası <lucide-angular name="arrow-right" style="width: 14px; height: 14px;"></lucide-angular>
+          </a>
+          <div *ngFor="let cat of categories" class="mobile-cat-group">
+            <div class="mobile-cat-badge" [style.color]="getColor(cat.badgeColor)">{{ cat.name }}</div>
+            <a *ngFor="let feat of cat.features" [routerLink]="['/features']" [fragment]="getFragment(feat.linkUrl)" class="mobile-feat-link" (click)="closeNav()">
+              <lucide-angular [name]="feat.iconKey || 'box'" style="width: 16px; height: 16px; color: inherit;"></lucide-angular>
+              {{ feat.title }}
+            </a>
+          </div>
+        </div>
+      </li>
+      <li><a routerLink="/hardware" routerLinkActive="active" class="nav-link" (click)="closeNav()">Donanım & Entegrasyon</a></li>
+      <li class="nav-accordion">
+        <div class="accordion-header" (click)="toggleSolutionsAccordion($event)" [class.active]="isSolutionsAccordionOpen">
+          <span>Sektörler</span>
+          <lucide-angular [name]="isSolutionsAccordionOpen ? 'chevron-up' : 'chevron-down'"></lucide-angular>
+        </div>
+        <div class="accordion-body" [class.open]="isSolutionsAccordionOpen">
+          
+          <a routerLink="/solutions" (click)="closeNav()" class="overview-link">
+            Sektörler Ana Sayfası <lucide-angular name="arrow-right" style="width: 14px; height: 14px;"></lucide-angular>
+          </a>
+
+          <div class="mobile-features-list">
+            <a *ngFor="let sect of sectors" [routerLink]="['/solutions']" [fragment]="sect.linkUrl" class="mobile-feature-item" (click)="closeNav()">
+              <div class="mf-icon" [style.color]="getColor(sect.badgeColor)">
+                <lucide-angular [name]="sect.iconKey"></lucide-angular>
+              </div>
+              <div class="mf-text">
+                <span class="mf-title">{{ sect.title }}</span>
+              </div>
+            </a>
+          </div>
+          
+        </div>
+      </li>
+      <li><a routerLink="/pricing" routerLinkActive="active" class="nav-link" (click)="closeNav()">Fiyatlandırma</a></li>
+      <li><a routerLink="/security" routerLinkActive="active" class="nav-link" (click)="closeNav()">Güvenlik</a></li>
+
+    </ul>
+  </nav>
+  
+  <div class="nav-footer">
+    <button routerLink="/contact" (click)="closeNav()" class="btn btn-primary">Ürün Tanıtımı İsteyin</button>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="admin-page">
+  <div class="page-header">
+    <div class="header-info">
+      <h1>Dinamik Sayfa Yönetimi (Page Builder)</h1>
+      <p>Yeni açılış sayfaları, blog yazıları ve kampanyalar için sürükle-bırak destekli blok yönetimi.</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-primary"><lucide-angular name="save"></lucide-angular> Sayfayı Yayına Al</button>
+    </div>
+  </div>
+
+  <div class="builder-layout">
+    
+    <!-- Sidebar: Available Blocks -->
+    <div class="builder-sidebar glass-panel">
+      <h3>Bloklar</h3>
+      <p class="subtitle">İstediğiniz bloğu sayfaya ekleyin.</p>
+      
+      <div class="block-list">
+        <div *ngFor="let block of availableBlocks" class="block-item draggable" (click)="addBlock(block)">
+          <lucide-angular [name]="block.icon"></lucide-angular>
+          <span>{{ block.title }}</span>
+          <lucide-angular name="plus" class="action-icon"></lucide-angular>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main: Active Layout -->
+    <div class="builder-main">
+      <div class="active-layout glass-panel">
+        
+        <div *ngIf="activeBlocks.length === 0" class="empty-state">
+          <lucide-angular name="layout-dashboard"></lucide-angular>
+          <p>Sayfanız şu an boş. Soldaki menüden blok ekleyebilirsiniz.</p>
+        </div>
+
+        <div *ngFor="let block of activeBlocks; let i = index" 
+             class="layout-block" 
+             [class.selected]="selectedBlock === block"
+             (click)="selectBlock(block)">
+          
+          <div class="block-drag-handle">
+            <lucide-angular name="grip-vertical"></lucide-angular>
+          </div>
+          
+          <div class="block-content">
+            <lucide-angular [name]="block.icon" class="block-icon"></lucide-angular>
+            <div class="block-info">
+              <h4>{{ block.title }}</h4>
+              <span class="block-type">{{ block.type | uppercase }} BLOK</span>
+            </div>
+          </div>
+          
+          <div class="block-actions">
+            <button class="btn-icon" (click)="removeBlock(i); $event.stopPropagation()">
+              <lucide-angular name="trash-2"></lucide-angular>
+            </button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Right: Block Properties / Rich Text -->
+    <div class="builder-properties glass-panel">
+      <h3>Blok Özellikleri</h3>
+      
+      <div *ngIf="!selectedBlock" class="empty-properties">
+        <p>Düzenlemek için ortadaki alandan bir blok seçin.</p>
+      </div>
+      
+      <div *ngIf="selectedBlock" class="properties-panel">
+        <h4>Seçili: {{ selectedBlock.title }}</h4>
+        
+        <!-- Standard Settings -->
+        <div class="form-group" *ngIf="selectedBlock.type !== 'text'">
+          <label>Blok Başlığı</label>
+          <input type="text" [value]="selectedBlock.title" class="form-control">
+        </div>
+        
+        <!-- Rich Text Editor (Quill) -->
+        <div class="rich-text-editor-wrapper" *ngIf="selectedBlock.type === 'text'">
+          <label>İçerik (Zengin Metin Editörü)</label>
+          <quill-editor [(ngModel)]="htmlContent" 
+                        [placeholder]="'İçeriğinizi buraya yazın...'"
+                        theme="snow">
+          </quill-editor>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+</div>

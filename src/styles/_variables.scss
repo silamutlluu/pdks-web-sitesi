@@ -1,0 +1,53 @@
+// ==========================================
+// PDKS Design System - Variables & Tokens
+// ==========================================
+
+// 1. Color Palette
+// ------------------------------------------
+$color-corporate-dominant: #0F172A; // Dark Navy
+$color-accent-primary: #2563EB;     // Bright Royal Blue
+$color-accent-secondary: #10B981;   // Emerald Green
+$color-bg-light: #F8FAFC;           // Soft Light Gray
+$color-bg-dark-card: #1E293B;       // Dark Card Backdrop
+
+// New Vibrant Palette Extensions (FAZ D62)
+$color-accent-indigo: #6366F1;      // Canlılık Aksanı (Indigo)
+$gradient-primary: linear-gradient(135deg, $color-accent-primary 0%, $color-accent-indigo 100%);
+$gradient-secondary: linear-gradient(135deg, $color-accent-secondary 0%, $color-accent-primary 100%);
+
+// Additional semantic colors
+$color-text-main: #334155;
+$color-text-muted: #64748B;
+$color-text-inverse: #FFFFFF;
+$color-border: #E2E8F0;
+
+// 2. Typography
+// ------------------------------------------
+$font-family-base: 'Inter', sans-serif;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// 3. Spacing & Layout (Bento Grid)
+// ------------------------------------------
+$bento-gap: 1.5rem;
+$bento-radius: 1.5rem;
+$glass-blur: 12px;
+
+// 4. Shadows & Glassmorphism
+// ------------------------------------------
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+
+$glass-bg-light: rgba(255, 255, 255, 0.7);
+$glass-bg-dark: rgba(30, 41, 59, 0.7);
+$glass-border-light: rgba(255, 255, 255, 0.4);
+$glass-border-dark: rgba(255, 255, 255, 0.1);
+
+// 5. Micro-interactions & Transitions
+// ------------------------------------------
+$transition-fast: 150ms ease-in-out;
+$transition-base: 300ms ease-in-out;
+$transition-spring: 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);

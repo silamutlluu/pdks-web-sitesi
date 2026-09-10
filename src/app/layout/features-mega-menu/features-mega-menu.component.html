@@ -1,0 +1,78 @@
+<div class="mega-menu-wrapper" (click)="$event.stopPropagation()">
+  
+  <div *ngIf="isLoading" class="state-container">
+    <lucide-angular name="loader-2" class="spin-icon"></lucide-angular>
+    <span>Menü Yükleniyor...</span>
+  </div>
+
+  <div *ngIf="hasError && !isLoading" class="state-container error-state">
+    <lucide-angular name="alert-circle"></lucide-angular>
+    <span>Menü yüklenirken bir hata oluştu.</span>
+  </div>
+
+  <div class="mega-menu-content" *ngIf="!isLoading && !hasError">
+    
+    <!-- Ana Kategoriler (Dinamik Kolon) -->
+    <div class="categories-grid">
+      <div class="category-col" *ngFor="let cat of categories">
+        <div class="category-badge" [style.color]="getColor(cat.badgeColor)" [style.backgroundColor]="getColor(cat.badgeColor) + '20'">
+          {{ cat.name }}
+        </div>
+        
+        <div class="features-list">
+          <a *ngFor="let feat of cat.features" [routerLink]="['/features']" [fragment]="getFragment(feat.linkUrl)" class="feature-item">
+            <div class="feature-icon" [style.color]="getColor(cat.badgeColor)">
+              <lucide-angular [name]="feat.iconKey || 'box'"></lucide-angular>
+            </div>
+            <div class="feature-text">
+              <span class="feature-title">{{ feat.title }}</span>
+              <span class="feature-desc">{{ feat.description }}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="menu-divider" *ngIf="genelCategory || sistemCategory"></div>
+
+    <!-- GENEL Kategorisi (Ayrık, Dar Kolon) -->
+    <div class="category-col general-col" *ngIf="genelCategory">
+      <div class="category-badge" [style.color]="getColor(genelCategory.badgeColor)" [style.backgroundColor]="getColor(genelCategory.badgeColor) + '20'">
+        {{ genelCategory.name }}
+      </div>
+      
+      <div class="features-list">
+        <a *ngFor="let feat of genelCategory.features" [routerLink]="['/features']" [fragment]="getFragment(feat.linkUrl)" class="feature-item">
+          <div class="feature-icon" [style.color]="getColor(genelCategory.badgeColor)">
+            <lucide-angular [name]="feat.iconKey || 'box'"></lucide-angular>
+          </div>
+          <div class="feature-text">
+            <span class="feature-title">{{ feat.title }}</span>
+            <span class="feature-desc">{{ feat.description }}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- SİSTEM VE AYARLAR Kategorisi -->
+    <div class="category-col general-col" *ngIf="sistemCategory">
+      <div class="category-badge" [style.color]="getColor(sistemCategory.badgeColor)" [style.backgroundColor]="getColor(sistemCategory.badgeColor) + '20'">
+        {{ sistemCategory.name }}
+      </div>
+      
+      <div class="features-list">
+        <a *ngFor="let feat of sistemCategory.features" [routerLink]="['/features']" [fragment]="getFragment(feat.linkUrl)" class="feature-item">
+          <div class="feature-icon" [style.color]="getColor(sistemCategory.badgeColor)">
+            <lucide-angular [name]="feat.iconKey || 'box'"></lucide-angular>
+          </div>
+          <div class="feature-text">
+            <span class="feature-title">{{ feat.title }}</span>
+            <span class="feature-desc">{{ feat.description }}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+  </div>
+</div>

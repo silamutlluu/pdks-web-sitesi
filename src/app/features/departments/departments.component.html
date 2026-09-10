@@ -1,0 +1,53 @@
+<div class="page-container">
+  <header class="page-header">
+    <div>
+      <h1>Departman Yönetimi</h1>
+      <p class="subtitle">Şirketinizin organizasyon şemasını ve departmanlarını yönetin</p>
+    </div>
+    <button class="primary-btn">
+      <span class="icon">+</span> Yeni Departman
+    </button>
+  </header>
+
+  <div class="tree-card glass-panel">
+    <div class="tree-container">
+      
+      <!-- Recursive template for tree nodes -->
+      <ng-template #deptTree let-departments>
+        <ul class="tree-list">
+          <li *ngFor="let dept of departments" class="tree-node">
+            <div class="node-content" [class.has-children]="dept.children?.length" (click)="toggleNode(dept)">
+              <div class="node-toggle" *ngIf="dept.children?.length">
+                <span class="toggle-icon">{{ dept.expanded ? '▼' : '▶' }}</span>
+              </div>
+              <div class="node-toggle empty" *ngIf="!dept.children?.length">
+                <span class="dot"></span>
+              </div>
+              
+              <div class="node-details">
+                <span class="node-name">{{ dept.name }}</span>
+                <span class="node-meta" *ngIf="dept.manager">👤 {{ dept.manager }}</span>
+                <span class="node-badge">{{ dept.employeeCount }} Personel</span>
+              </div>
+
+              <div class="node-actions" (click)="$event.stopPropagation()">
+                <button class="action-btn" title="Alt Departman Ekle">⊕</button>
+                <button class="action-btn edit" title="Düzenle">✎</button>
+                <button class="action-btn delete" title="Sil">🗑</button>
+              </div>
+            </div>
+
+            <!-- Children -->
+            <div class="node-children" *ngIf="dept.children && dept.expanded">
+              <ng-container *ngTemplateOutlet="deptTree; context: { $implicit: dept.children }"></ng-container>
+            </div>
+          </li>
+        </ul>
+      </ng-template>
+
+      <!-- Initial render -->
+      <ng-container *ngTemplateOutlet="deptTree; context: { $implicit: departments }"></ng-container>
+
+    </div>
+  </div>
+</div>

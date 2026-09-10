@@ -1,0 +1,136 @@
+<div class="contact-page">
+  
+  <!-- Hero Section -->
+  <section class="contact-hero container">
+    <div class="hero-content">
+      <h1 class="page-title">Bizimle İletişime Geçin</h1>
+      <p class="page-subtitle">Sorularınız, demo talepleriniz veya iş ortaklıkları için ekibimizle doğrudan bağlantı kurun. Size yardımcı olmaktan memnuniyet duyarız.</p>
+    </div>
+  </section>
+
+  <!-- Main Content Layout -->
+  <section class="contact-layout container">
+    
+    <!-- Contact Info Cards -->
+    <div class="contact-info">
+      
+      <div class="info-card glass-panel hover-lift">
+        <lucide-angular name="map-pin"></lucide-angular>
+        <div class="info-details">
+          <h3>Merkez Ofis</h3>
+          <p>Kısıklı Caddesi No:2 Ak İş Merkezi A Blok Kat:2 Altunizade Üsküdar 34662 İstanbul</p>
+        </div>
+      </div>
+      
+      <div class="info-card glass-panel hover-lift">
+        <lucide-angular name="phone-call"></lucide-angular>
+        <div class="info-details">
+          <h3>Telefon</h3>
+          <p>Müşteri Hizmetleri: 0 216 522 00 00<br>Faks: 0 216 474 10 92</p>
+        </div>
+      </div>
+      
+      <div class="info-card glass-panel hover-lift">
+        <lucide-angular name="mail"></lucide-angular>
+        <div class="info-details">
+          <h3>E-posta</h3>
+          <p>info&#64;link.com.tr</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Demo Request Form (Bento Style) -->
+    <div class="demo-form-wrapper bento-item glass-panel">
+      <div class="form-header">
+        <lucide-angular name="calendar-clock"></lucide-angular>
+        <h2>Ücretsiz Ürün Tanıtımı Randevusu Alın</h2>
+        <p>Uzmanlarımız sistemin işleyişini sizin verileriniz üzerinden canlı olarak göstersin.</p>
+      </div>
+      
+      <form class="demo-form" (ngSubmit)="submitForm()" #contactForm="ngForm" *ngIf="!isSuccess">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">Adınız</label>
+            <input type="text" id="firstName" name="firstName" [(ngModel)]="formData.firstName" placeholder="Örn. Ahmet" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Soyadınız</label>
+            <input type="text" id="lastName" name="lastName" [(ngModel)]="formData.lastName" placeholder="Örn. Yılmaz" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="company">Firma Adı</label>
+            <input type="text" id="company" name="company" [(ngModel)]="formData.company" placeholder="Kurumunuzun adı" required>
+          </div>
+          <div class="form-group">
+            <label for="employeeCount">Çalışan Sayısı</label>
+            <select id="employeeCount" name="employeeCount" [(ngModel)]="formData.employeeCount" required>
+              <option value="">Seçiniz...</option>
+              <option value="1-50">1 - 50</option>
+              <option value="51-250">51 - 250</option>
+              <option value="250-1000">250 - 1000</option>
+              <option value="1000+">1000+</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Kurumsal E-posta</label>
+            <div class="input-wrapper">
+              <lucide-angular name="mail" class="input-icon"></lucide-angular>
+              <input type="email" id="email" name="email" [(ngModel)]="formData.email" placeholder="isim@sirketiniz.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefon</label>
+            <div class="input-wrapper">
+              <lucide-angular name="phone-call" class="input-icon"></lucide-angular>
+              <input type="tel" id="phone" name="phone" [(ngModel)]="formData.phone" placeholder="05XX XXX XX XX" required>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="subject">Konu / İlgilendiğiniz Çözüm</label>
+          <select id="subject" name="subject" [(ngModel)]="formData.subject" required>
+            <option value="">Seçiniz...</option>
+            <option value="demo">Ürün Tanıtımı Talebi</option>
+            <option value="donanim-uyum">Donanım Uyum Analizi</option>
+            <option value="fiyat-teklifi">Fiyat Teklifi</option>
+            <option value="bilgi">Genel Bilgi</option>
+            <option value="diger">Diğer</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">İhtiyaçlarınız (Opsiyonel)</label>
+          <textarea id="message" name="message" [(ngModel)]="formData.message" rows="4" placeholder="Örn: Sadece vardiya modülü ile ilgileniyoruz..."></textarea>
+        </div>
+        
+        <div *ngIf="isError" style="color: #ef4444; margin-bottom: 1rem; font-size: 0.9rem;">
+          Form gönderilirken bir hata oluştu. Lütfen bilgilerinizi kontrol edip tekrar deneyin.
+        </div>
+        
+        <button type="submit" class="btn btn-primary hover-lift submit-btn" [disabled]="contactForm.invalid || isSubmitting">
+          <span *ngIf="!isSubmitting">Ürün Tanıtımı Randevusu Oluştur <lucide-angular name="send"></lucide-angular></span>
+          <span *ngIf="isSubmitting">Gönderiliyor...</span>
+        </button>
+        <p class="form-disclaimer">Formu göndererek <a href="#">KVKK Aydınlatma Metni</a>'ni okuyup anladığınızı kabul edersiniz.</p>
+      </form>
+
+      <!-- Başarılı Durumu -->
+      <div class="success-message" *ngIf="isSuccess" style="text-align: center; padding: 3rem 1rem;">
+        <lucide-angular name="check-circle" style="color: #10b981; width: 64px; height: 64px; margin-bottom: 1rem;"></lucide-angular>
+        <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">Talebiniz Alındı</h3>
+        <p style="color: #94a3b8; margin-bottom: 1.5rem;">En kısa sürede uzmanlarımız sizinle iletişime geçecektir.</p>
+        <button class="btn btn-ghost" (click)="isSuccess = false">Yeni Form Gönder</button>
+      </div>
+    </div>
+
+  </section>
+
+</div>

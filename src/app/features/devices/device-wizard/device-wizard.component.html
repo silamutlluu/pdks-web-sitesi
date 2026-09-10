@@ -1,0 +1,133 @@
+<div class="page-container">
+  <header class="page-header">
+    <div>
+      <h1>Yeni Cihaz Ekle</h1>
+      <p class="subtitle">Sisteme yeni bir PDKS donanımı tanımlayın</p>
+    </div>
+    <button class="action-btn back" (click)="router.navigate(['/devices'])">İptal</button>
+  </header>
+
+  <div class="wizard-container glass-panel">
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step" [class.active]="currentStep === 1" [class.completed]="currentStep > 1">
+        <div class="step-circle">1</div>
+        <span>Temel Bilgiler</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" [class.active]="currentStep === 2" [class.completed]="currentStep > 2">
+        <div class="step-circle">2</div>
+        <span>Bağlantı Testi</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" [class.active]="currentStep === 3">
+        <div class="step-circle">3</div>
+        <span>Onay</span>
+      </div>
+    </div>
+
+    <div class="wizard-content">
+      
+      <!-- STEP 1: Temel Bilgiler -->
+      <form [formGroup]="deviceForm" *ngIf="currentStep === 1" class="step-form">
+        <h2 class="step-title">Cihaz Bilgileri</h2>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Cihaz Adı</label>
+            <input type="text" formControlName="name" placeholder="Örn: Ana Giriş Turnikesi">
+          </div>
+          
+          <div class="form-group">
+            <label>Marka / Protokol</label>
+            <select formControlName="brand">
+              <option value="ZKTeco">ZKTeco</option>
+              <option value="Hikvision">Hikvision</option>
+              <option value="Generic">Generic TCP</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>IP Adresi</label>
+            <input type="text" formControlName="ipAddress" placeholder="192.168.1.x">
+          </div>
+
+          <div class="form-group">
+            <label>Port</label>
+            <input type="number" formControlName="port" placeholder="4370">
+          </div>
+        </div>
+      </form>
+
+      <!-- STEP 2: Bağlantı Testi -->
+      <div *ngIf="currentStep === 2" class="step-test">
+        <h2 class="step-title">Cihazla İletişim Kuruluyor</h2>
+        <p class="test-desc">Girdiğiniz IP adresine ve porta test paketi gönderilecektir.</p>
+        
+        <div class="test-target">
+          <span class="target-ip">{{ deviceForm.value.ipAddress }}:{{ deviceForm.value.port }}</span>
+          <span class="target-brand">{{ deviceForm.value.brand }}</span>
+        </div>
+
+        <button class="primary-btn test-btn" (click)="testConnection()" [disabled]="isTesting">
+          <span *ngIf="!isTesting">Bağlantıyı Test Et</span>
+          <span *ngIf="isTesting" class="loader"></span>
+        </button>
+
+        <div class="test-result success" *ngIf="testResult === 'success'">
+          <div class="result-icon">✓</div>
+          <div class="result-text">
+            <strong>Bağlantı Başarılı!</strong>
+            <p>Cihaz yanıt veriyor, işleme devam edebilirsiniz.</p>
+          </div>
+        </div>
+
+        <div class="test-result error" *ngIf="testResult === 'error'">
+          <div class="result-icon">!</div>
+          <div class="result-text">
+            <strong>Bağlantı Başarısız</strong>
+            <p>{{ testErrorMsg }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Onay -->
+      <div *ngIf="currentStep === 3" class="step-summary">
+        <h2 class="step-title">Özet ve Kayıt</h2>
+        <div class="summary-card">
+          <div class="summary-item">
+            <span class="label">Cihaz Adı:</span>
+            <span class="val">{{ deviceForm.value.name }}</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">IP ve Port:</span>
+            <span class="val">{{ deviceForm.value.ipAddress }}:{{ deviceForm.value.port }}</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Marka:</span>
+            <span class="val">{{ deviceForm.value.brand }}</span>
+          </div>
+        </div>
+        <div class="info-alert">
+          ℹ️ Cihaz kaydedildikten sonra "Device Binder" havuzuna aktarılacak ve sürekli izlenecektir.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Actions -->
+    <div class="wizard-actions">
+      <button class="action-btn back" (click)="prevStep()" [disabled]="currentStep === 1 || isSaving || isTesting">Geri</button>
+      
+      <button class="primary-btn next" (click)="nextStep()" *ngIf="currentStep < 3" 
+        [disabled]="(currentStep === 1 && deviceForm.invalid) || (currentStep === 2 && testResult !== 'success') || isTesting">
+        İleri →
+      </button>
+
+      <button class="primary-btn save" (click)="saveDevice()" *ngIf="currentStep === 3" [disabled]="isSaving">
+        <span *ngIf="!isSaving">Kaydet ve Bitir</span>
+        <span *ngIf="isSaving" class="loader"></span>
+      </button>
+    </div>
+  </div>
+</div>

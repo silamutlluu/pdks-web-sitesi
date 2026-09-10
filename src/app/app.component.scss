@@ -1,0 +1,70 @@
+@import '../styles/variables';
+
+.mobile-bottom-bar {
+  display: none; // Hidden on desktop
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: $color-bg-light;
+  border-top: 1px solid $color-border;
+  padding: 0.75rem 1rem;
+  z-index: 1000;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+}
+
+.flex-fill {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-bar {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  /* Add padding to the wrapper so content doesn't get hidden behind the bar */
+  .app-layout {
+    padding-bottom: 70px;
+  }
+}
+
+.whatsapp-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #25d366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+  z-index: 9999;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  lucide-angular {
+    width: 32px;
+    height: 32px;
+    color: white;
+  }
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.6);
+  }
+  
+  @media (max-width: 768px) {
+    bottom: 5.5rem; /* Avoid overlapping with mobile bottom bar */
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+    
+    lucide-angular {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

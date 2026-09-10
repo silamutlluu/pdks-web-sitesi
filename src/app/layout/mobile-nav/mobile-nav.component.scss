@@ -1,0 +1,245 @@
+@import '../../../styles/variables';
+
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 1999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition-base;
+  
+  &.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.mobile-nav-panel {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transition: right $transition-spring;
+  border-radius: 0;
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  
+  &.open {
+    right: 0;
+  }
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid $glass-border-light;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: $color-text-main;
+}
+
+.nav-links {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    
+    li {
+      margin-bottom: 0;
+      
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.65rem 0.75rem;
+        min-height: 44px;
+        text-decoration: none;
+        font-size: 1rem;
+        color: $color-text-main;
+        font-weight: $font-weight-medium;
+        border-radius: 0.5rem;
+        transition: background 0.2s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+      }
+    }
+  }
+}
+
+.nav-footer {
+  padding: 1.5rem;
+  
+  .btn {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+/* Accordion Styles */
+.mobile-accordion-item,
+.nav-accordion {
+  width: 100%;
+}
+
+.accordion-header {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0.75rem;
+  min-height: 44px;
+  font-size: 1rem;
+  color: $color-text-main;
+  font-weight: $font-weight-medium;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  lucide-angular {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease-out, opacity 0.25s ease-out, padding 0.25s ease-out;
+  padding: 0;
+  
+  &.open {
+    max-height: 800px; /* yeterince büyük bir değer */
+    opacity: 1;
+    padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+  }
+}
+
+
+.mobile-cat-group {
+  margin-bottom: 1.25rem;
+}
+
+.mobile-cat-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+  padding: 0.2rem 0;
+}
+
+.mobile-feat-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $color-text-muted;
+  text-decoration: none;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.4rem;
+  font-size: 0.875rem;
+  transition: color 0.2s ease, background 0.2s ease;
+  
+  &:hover {
+    color: $color-accent-primary;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  lucide-angular {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.all-features-link {
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
+}
+
+/* Sektör listesi - ikon + metin yan yana */
+.mobile-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.mobile-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.4rem;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .mf-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 0.4rem;
+
+    lucide-angular {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .mf-title {
+    font-size: 0.875rem;
+    color: $color-text-muted;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.overview-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: $color-accent-primary;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.3rem 0 0.6rem 0;
+  transition: opacity 0.2s ease;
+
+  &:hover { opacity: 0.8; }
+}

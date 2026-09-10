@@ -1,0 +1,357 @@
+@import 'quill/dist/quill.snow.css';
+@import 'styles/variables';
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+  font-family: $font-family-base;
+  color: $color-text-main;
+  background-color: $color-bg-light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global Mesh Gradient Background */
+.global-mesh-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0; /* Changed from -1 so it stays above body background */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.app-layout {
+  position: relative;
+  z-index: 1; /* Content sits above the mesh background */
+}
+
+.global-mesh-bg::before, .global-mesh-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px); /* Blur slightly reduced for better visibility */
+  opacity: 0.8; /* Opacity increased */
+  animation: floatOrbGlobal 12s ease-in-out infinite alternate;
+  will-change: transform; /* Performans ve donanım hızlandırma için */
+}
+
+/* Koyu Lacivert & Mor */
+.global-mesh-bg::before {
+  width: 80vw;
+  height: 80vw;
+  max-width: 900px;
+  max-height: 900px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, rgba(30, 58, 138, 0.4) 50%, rgba(30, 58, 138, 0) 80%);
+  top: -15%;
+  left: -15%;
+}
+
+/* Zümrüt Yeşili */
+.global-mesh-bg::after {
+  width: 70vw;
+  height: 70vw;
+  max-width: 800px;
+  max-height: 800px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.35) 0%, rgba(16, 185, 129, 0) 70%);
+  bottom: -15%;
+  right: -10%;
+  animation-delay: -10s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes floatOrbGlobal {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(15vw, -10vh) scale(1.15) rotate(5deg); }
+  66% { transform: translate(-10vw, 15vh) scale(0.85) rotate(-5deg); }
+  100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+
+/* Pembe / Rose Orb - SAĞ ÜST KÖŞe */
+.global-mesh-bg .orb-rose {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 700px;
+  max-height: 700px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.4) 0%, rgba(244, 63, 94, 0) 70%);
+  top: -10%;
+  right: -15%;
+  will-change: transform;
+  animation: floatOrbRose 16s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* Cyan / Turkuaz Orb - SOL ALT KÖŞe */
+.global-mesh-bg .orb-cyan {
+  position: absolute;
+  width: 55vw;
+  height: 55vw;
+  max-width: 650px;
+  max-height: 650px;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: 0.45;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(6, 182, 212, 0) 70%);
+  bottom: -10%;
+  left: -10%;
+  will-change: transform;
+  animation: floatOrbCyan 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes floatOrbRose {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-12vw, 8vh) scale(1.1); }
+  66% { transform: translate(10vw, -12vh) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes floatOrbCyan {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(8vw, 10vh) scale(1.12); }
+  66% { transform: translate(-8vw, -8vh) scale(0.88); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* Glass Panel - Premium Feel */
+.glass-panel {
+  background: $glass-bg-light;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid $glass-border-light;
+  border-radius: $bento-radius;
+  box-shadow: $shadow-glass;
+}
+
+/* Hover Lift Micro-animation */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Scroll Reveal Micro-animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+
+/* Sticky Trust Badge (KVKK) */
+.trust-badge-sticky {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(16, 185, 129, 0.15); /* Emerald tint */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 2rem;
+  color: #10b981;
+  font-weight: $font-weight-medium;
+  font-size: 0.875rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: all $transition-fast;
+  cursor: pointer;
+  text-decoration: none;
+  
+  &:hover {
+    background: rgba(16, 185, 129, 0.25);
+    transform: translateY(-2px);
+    color: #34d399;
+  }
+  
+  lucide-angular {
+    width: 20px;
+    height: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    bottom: 5.5rem;
+    left: 1.5rem;
+  }
+}
+
+/* Mobile UX: Responsive Tables */
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  
+  table {
+    min-width: 600px;
+    width: 100%;
+  }
+}
+
+/* Container Utilities */
+.container {
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Bento Grid Utilities */
+.bento-container {
+  display: grid;
+  gap: $bento-gap;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  padding: $bento-gap 1.5rem;
+}
+
+.bento-item {
+  border-radius: $bento-radius;
+  overflow: hidden;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+}
+
+/* Micro-interactions */
+.hover-lift {
+  transition: transform $transition-fast, box-shadow $transition-fast;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: $shadow-md;
+}
+
+/* ==========================================
+   FAZ F4: CTA Buton Stratejisi
+   ========================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  border: none;
+  transition: all $transition-fast;
+  text-decoration: none;
+}
+
+/* Birincil CTA */
+.btn-primary {
+  background: $color-accent-primary;
+  color: #ffffff;
+  
+  &:hover {
+    background: $gradient-primary;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  }
+}
+
+/* ==========================================
+   FAZ D31: Accordion Styles
+   ========================================== */
+.accordion-item {
+  margin-bottom: 0.75rem; /* Reduced margin for compact look */
+  overflow: hidden;
+
+  .accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin: 0;
+    padding: 0.75rem 1rem; /* Reduced vertical padding for compact look */
+    transition: background-color 0.15s ease;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  .accordion-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    padding: 0 1rem;
+    opacity: 0;
+    transition: grid-template-rows 0.15s ease-out, padding 0.15s ease-out, opacity 0.1s ease-out;
+    
+    > p {
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+  }
+
+  &.active {
+    .accordion-body {
+      grid-template-rows: 1fr;
+      padding: 0.75rem 1rem; /* Compact vertical padding */
+      opacity: 1;
+      transition: grid-template-rows 0.15s ease-out, padding 0.15s ease-out, opacity 0.15s ease-out;
+    }
+    
+    .accordion-header {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+/* İkincil CTA (Ghost / Outline) */
+.btn-ghost {
+  background-color: transparent;
+  color: $color-text-main;
+  border: 1px solid $color-border;
+  
+  &:hover {
+    background-color: rgba(99, 102, 241, 0.05);
+    border-color: rgba(99, 102, 241, 0.2);
+    color: $color-accent-indigo;
+  }
+}
+
+/* Mikro Dönüşüm CTA */
+.btn-micro {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  background-color: transparent;
+  color: $color-accent-primary;
+  font-weight: $font-weight-medium;
+  border: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+

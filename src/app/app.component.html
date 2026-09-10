@@ -1,0 +1,33 @@
+<div class="global-mesh-bg">
+  <div class="orb-rose"></div>
+  <div class="orb-cyan"></div>
+</div>
+<div class="app-layout">
+  <app-header></app-header>
+  <app-mobile-nav></app-mobile-nav>
+  
+  <div class="main-content-wrapper">
+    <!-- Admin sidebar will be controlled by router or conditions, for now it's just here -->
+    <!-- <app-sidebar></app-sidebar> -->
+    <main class="content">
+      <router-outlet></router-outlet>
+      
+      <!-- KVKK Trust Badge (Global) -->
+      <a routerLink="/security" class="trust-badge-sticky" title="Sistemimiz 100% KVKK ve GDPR standartlarına uygundur. Güvenlik sayfasını inceleyin.">
+        <!-- FAZ D15: KVKK Logo Placeholder -->
+        <img src="https://placehold.co/24x24/10b981/ffffff?text=KVKK" alt="KVKK Logo" class="trust-logo" loading="lazy" />
+        <span>KVKK Uyumlu</span>
+      </a>
+    </main>
+  </div>
+
+  <app-mobile-bottom-bar></app-mobile-bottom-bar>
+  
+  <app-footer></app-footer>
+  
+  <!-- Global WhatsApp FAB -->
+  <a href="https://wa.me/905551234567" target="_blank" class="whatsapp-fab" aria-label="WhatsApp Destek">
+    <!-- FAZ D15: WhatsApp Logo Placeholder -->
+    <img src="assets/logos/whatsapp-logo-v3.png" alt="WhatsApp Logo" class="fab-logo" loading="lazy" style="width: 32px; height: 32px;" />
+  </a>
+</div>

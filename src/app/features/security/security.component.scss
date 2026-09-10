@@ -1,0 +1,179 @@
+@import '../../../styles/variables';
+
+.container {
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 4rem $bento-gap;
+}
+
+.security-hero {
+  text-align: center;
+  padding-bottom: 2rem;
+  
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: #10b981; // Green for security
+    font-weight: $font-weight-semibold;
+    margin-bottom: 2rem;
+    border-color: rgba(16, 185, 129, 0.2);
+    
+    lucide-angular {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  
+  .page-title {
+    font-size: 3rem;
+    font-weight: $font-weight-bold;
+    color: $color-text-main;
+    margin-bottom: 1rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1.25rem;
+    color: $color-text-muted;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+
+.security-grid {
+  margin-bottom: 4rem;
+}
+
+.security-card {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+  border-left: 4px solid transparent;
+  transition: all $transition-fast;
+  
+  &:hover {
+    border-left-color: #10b981;
+  }
+  
+  .icon {
+    width: 40px;
+    height: 40px;
+    color: #10b981;
+    margin-bottom: 0.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    color: $color-text-main;
+  }
+  
+  p {
+    color: $color-text-muted;
+    line-height: 1.6;
+    flex: 1;
+  }
+}
+
+.security-visual {
+  margin-bottom: 4rem;
+  
+  .visual-wrapper {
+    padding: 4rem;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    text-align: center;
+  }
+  
+  .visual-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    
+    lucide-angular {
+      width: 32px;
+      height: 32px;
+      color: #10b981;
+    }
+    
+    h3 {
+      font-size: 1.75rem;
+      color: $color-text-main;
+    }
+  }
+  
+  .visual-desc {
+    color: $color-text-muted;
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+    line-height: 1.6;
+    font-size: 1.1rem;
+  }
+  
+  .cert-logos {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: $color-bg-light;
+      border: 1px solid $glass-border-dark;
+      border-radius: 2rem;
+      color: $color-text-main;
+      font-weight: $font-weight-medium;
+      
+      lucide-angular {
+        width: 18px;
+        height: 18px;
+        color: #10b981;
+      }
+    }
+  }
+}
+
+/* CTA Banner */
+.cta-banner {
+  .banner-inner {
+    padding: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, $color-bg-dark-card, $color-corporate-dominant);
+    color: #fff;
+    border-radius: $bento-radius;
+  }
+  
+  .banner-content {
+    max-width: 600px;
+    
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      color: $color-text-muted;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-banner .banner-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .visual-wrapper {
+    padding: 2rem !important;
+  }
+}

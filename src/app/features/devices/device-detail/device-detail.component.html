@@ -1,0 +1,100 @@
+<div class="page-container">
+  
+  <div *ngIf="isLoading" class="loading-state glass-panel">
+    <div class="loader"></div>
+    <p>Cihaz detayları yükleniyor...</p>
+  </div>
+
+  <ng-container *ngIf="!isLoading && device">
+    <header class="page-header">
+      <div class="header-content">
+        <a routerLink="/devices" class="back-link">← Cihazlara Dön</a>
+        <div class="title-row">
+          <h1>{{ device.name }}</h1>
+          <div class="status-indicator" [ngClass]="device.status.toLowerCase()">
+            <span class="pulse-dot"></span>
+            {{ device.status }}
+          </div>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <button class="action-btn connect" (click)="reconnect()" [disabled]="isConnecting" *ngIf="device.status !== 'Online'">
+          <span *ngIf="!isConnecting">Yeniden Bağlan</span>
+          <span *ngIf="isConnecting" class="loader small"></span>
+        </button>
+        <button class="action-btn disconnect" (click)="disconnect()" [disabled]="isConnecting" *ngIf="device.status === 'Online'">
+          <span *ngIf="!isConnecting">Bağlantıyı Kes</span>
+          <span *ngIf="isConnecting" class="loader small"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="content-grid">
+      
+      <!-- Cihaz Bilgileri -->
+      <div class="info-card glass-panel">
+        <h2>Cihaz Bilgileri</h2>
+        <div class="info-list">
+          <div class="info-item">
+            <span class="label">IP Adresi</span>
+            <span class="value">{{ device.ipAddress }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Port</span>
+            <span class="value">{{ device.port }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Marka</span>
+            <span class="value">{{ device.brand }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Son Heartbeat</span>
+            <span class="value">{{ device.lastHeartbeat || '-' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Konum</span>
+            <span class="value">{{ device.location || 'Belirtilmedi' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Atanmış Personeller -->
+      <div class="assignments-card glass-panel">
+        <div class="card-header">
+          <h2>Atanmış Personeller</h2>
+          <button class="primary-btn small">+ Personel Ata</button>
+        </div>
+        
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Personel</th>
+                <th>Yetki Grubu</th>
+                <th>Zaman Dilimi</th>
+                <th>Senkron Durumu</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let assignment of assignments">
+                <td class="fw-600">{{ assignment.employeeName }}</td>
+                <td>{{ assignment.accessGroupName }}</td>
+                <td>{{ assignment.timeZoneName }}</td>
+                <td>
+                  <span class="sync-badge" [ngClass]="assignment.syncStatus.toLowerCase()">
+                    {{ assignment.syncStatus === 'Synced' ? 'Senkronize' : (assignment.syncStatus === 'Pending' ? 'Bekliyor' : 'Hata') }}
+                  </span>
+                </td>
+              </tr>
+              <tr *ngIf="assignments.length === 0">
+                <td colspan="4" class="empty-state">Bu cihaza atanmış personel bulunamadı.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </ng-container>
+</div>

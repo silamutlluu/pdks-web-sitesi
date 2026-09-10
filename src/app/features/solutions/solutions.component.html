@@ -1,0 +1,197 @@
+<div class="solutions-page">
+  
+  <!-- Hero Section -->
+  <section class="solutions-hero container">
+    <div class="hero-content">
+      <h1 class="page-title">Her Sektöre Özel PDKS Çözümleri</h1>
+      <p class="page-subtitle">İşletmenizin dinamiklerine tam uyum sağlayan, sektörel ihtiyaçlara göre optimize edilmiş modüler yapı.</p>
+    </div>
+  </section>
+
+  <!-- Sektörel Otomasyon & Çözüm Rehberi -->
+  <section class="sector-calculator-section container animate-fade-in-up">
+    <div class="calc-header text-left">
+      <h2 class="section-title">İşletmenizin Sektörünü Seçin</h2>
+      <p class="section-subtitle">Sektörünüze özel kurgulanan otomasyon altyapısını, öne çıkan metrikleri ve yönetim kolaylıklarını canlı inceleyin.</p>
+    </div>
+
+    <div class="calc-wrapper glass-panel">
+      
+      <!-- Sol Taraf: Sektör Seçimi -->
+      <div class="calc-inputs-col">
+        <div class="input-group">
+          <label class="input-label">Sektörünüzü Seçin</label>
+          <div class="sector-selector-grid">
+            <button 
+              *ngFor="let s of sectors"
+              type="button"
+              class="sector-opt-btn"
+              [class.active]="selectedSectorId === s.id"
+              (click)="selectSector(s.id)">
+              <lucide-angular [name]="s.icon" class="s-opt-icon"></lucide-angular>
+              <span>{{ s.name }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sağ Taraf: Canlı Sektör Detay Kartı -->
+      <div class="calc-result-card">
+        <div class="res-badge">{{ currentSector.highlightBadge }}</div>
+
+        <div class="res-header">
+          <span class="res-sector-tag">Sektörel Otomasyon Hedefi</span>
+          <h3 class="res-sector-title">{{ currentSector.name }} Çözüm Modülü</h3>
+        </div>
+
+        <!-- İstatistik Çifti -->
+        <div class="res-stats-grid">
+          <div class="r-stat-box">
+            <lucide-angular name="shield-check" class="r-icon text-emerald"></lucide-angular>
+            <div class="r-info">
+              <strong>{{ currentSector.statValue }}</strong>
+              <span>{{ currentSector.statLabel }}</span>
+            </div>
+          </div>
+
+          <div class="r-stat-box">
+            <lucide-angular name="zap" class="r-icon text-purple"></lucide-angular>
+            <div class="r-info">
+              <strong>%100 Entegre</strong>
+              <span>Bulut & Mobil Yönetim</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sektörel Özel Not -->
+        <div class="res-note-box">
+          <lucide-angular name="info" class="note-icon"></lucide-angular>
+          <span>{{ currentSector.note }}</span>
+        </div>
+
+        <!-- Aksiyon Butonu -->
+        <div class="res-action">
+          <a routerLink="/pricing" class="btn btn-primary w-100 hover-lift">
+            Bu Sektöre Özel Çözümleri İnceleyin <lucide-angular name="arrow-right" class="btn-icon"></lucide-angular>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Solutions Grid -->
+  <section class="solutions-grid container">
+    <div class="bento-container">
+      
+      <!-- Fabrika -->
+      <div id="uretim-ve-fabrika" class="solution-card bento-item glass-panel hover-lift">
+        <div class="card-header">
+          <lucide-angular name="factory" [size]="48" class="feature-logo text-primary"></lucide-angular>
+          <h3>Üretim & Fabrika</h3>
+        </div>
+        <div class="card-body">
+          <p>Üretim sektörünün dinamiklerine uygun olarak kurgulanan güçlü otomasyon altyapısı sayesinde; 3 vardiyalı karmaşık rotasyonlar, mesai bütçeleri ve puantaj süreçleri saniyeler içinde hatasız hesaplanarak operasyonel verimlilik en üst düzeye çıkarılır.</p>
+          <ul class="feature-list">
+            <li><lucide-angular name="check-circle"></lucide-angular> Vardiya Çakışma Kontrolü</li>
+            <li><lucide-angular name="check-circle"></lucide-angular> Turnike & Yemekhane Entegrasyonu</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Mağaza / Perakende -->
+      <div id="perakende-ve-magazacilik" class="solution-card bento-item glass-panel hover-lift">
+        <div class="card-header">
+          <lucide-angular name="store" [size]="48" class="feature-logo text-primary"></lucide-angular>
+          <h3>Perakende & Mağazacılık</h3>
+        </div>
+        <div class="card-body">
+          <p>Perakende sektörünün yoğun personel sirkülasyonuna özel tasarlanan merkezi yönetim sistemi ile; yüzlerce farklı şubedeki esnek mesai planlamaları, part-time çalışan koordinasyonu ve prim hak edişleri tek bir ekran üzerinden pürüzsüzce yönetilebilir.</p>
+          <ul class="feature-list">
+            <li><lucide-angular name="check-circle"></lucide-angular> Çoklu Lokasyon Yönetimi</li>
+            <li><lucide-angular name="check-circle"></lucide-angular> Mobil Check-in (NFC/QR)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ofis -->
+      <div id="kurumsal-ofisler" class="solution-card bento-item glass-panel hover-lift">
+        <div class="card-header">
+          <lucide-angular name="briefcase" [size]="48" class="feature-logo text-primary"></lucide-angular>
+          <h3>Kurumsal Ofisler</h3>
+        </div>
+        <div class="card-body">
+          <p>Modern ofis yaşamına ve yeni nesil çalışma kültürüne yönelik analitik çözümler sunan dijital sistem ile; esnek mesai, uzaktan ve hibrit çalışma modellerinde personelin verimliliği desteklenirken kurum içi süreçlere tam entegrasyon sağlanır.</p>
+          <ul class="feature-list">
+            <li><lucide-angular name="check-circle"></lucide-angular> Esnek Mesai Takibi</li>
+            <li><lucide-angular name="check-circle"></lucide-angular> Kapsamlı İzin Yönetimi</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Şantiye -->
+      <div id="insaat-ve-santiye" class="solution-card bento-item glass-panel hover-lift">
+        <div class="card-header">
+          <lucide-angular name="hard-hat" [size]="48" class="feature-logo text-primary"></lucide-angular>
+          <h3>İnşaat & Şantiye</h3>
+        </div>
+        <div class="card-body">
+          <p>Saha operasyonlarının zorlu koşullarına özel geliştirilen teknolojik altyapı sayesinde; dış mekana tam dayanıklı donanımlar ve GPS doğrulamalı yenilikçi mobil çözümlerle sahadaki tüm veriler anlık olarak merkeze taşınarak kesintisiz bir kontrol ağı oluşturulur.</p>
+          <ul class="feature-list">
+            <li><lucide-angular name="check-circle"></lucide-angular> GPS Konum Doğrulama</li>
+            <li><lucide-angular name="check-circle"></lucide-angular> Taşeron Takip Modülü</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Sağlık & Turizm -->
+      <div id="saglik-ve-turizm" class="solution-card bento-item glass-panel hover-lift">
+        <div class="card-header">
+          <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+            <lucide-angular name="heart-pulse" [size]="48" class="feature-logo text-primary"></lucide-angular>
+          </div>
+          <h3>Sağlık & Turizm</h3>
+        </div>
+        <div class="card-body">
+          <p>Sağlık ve turizm sektörlerinin 7/24 kesintisiz hizmet veren yoğun yapısına özel kurgulanan sistem ile; nöbet değişimleri, fazla mesailer ve çoklu lokasyon (şube/tesis) personeli tek bir panel üzerinden hatasız yönetilerek operasyonel devamlılık güvence altına alınır.</p>
+          <ul class="feature-list">
+            <li><lucide-angular name="check-circle"></lucide-angular> 7/24 Nöbet ve Vardiya Takibi</li>
+            <li><lucide-angular name="check-circle"></lucide-angular> Çoklu Tesis Yönetimi</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Eğitim & Okul -->
+      <div id="egitim-ve-okul" class="solution-card bento-item glass-panel hover-lift">
+        <div class="card-header">
+          <lucide-angular name="graduation-cap" [size]="48" class="feature-logo text-primary"></lucide-angular>
+          <h3>Eğitim & Okul</h3>
+        </div>
+        <div class="card-body">
+          <p>Eğitim kurumlarının dinamik yapısına tam uyum sağlayan idari altyapı ile; akademik ve idari personelin ders programlarına bağlı mesai takipleri, nöbetçi öğretmen görevlendirmeleri ve kampus giriş-çıkışları tek bir dijital merkezden kolayca koordine edilir.</p>
+          <ul class="feature-list">
+            <li><lucide-angular name="check-circle"></lucide-angular> Derslik ve Nöbet Planlaması</li>
+            <li><lucide-angular name="check-circle"></lucide-angular> Akademik Personel Takibi</li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner container">
+    <div class="banner-inner glass-panel">
+      <div class="banner-content">
+        <h2>Sektörünüze özel ürün tanıtımı ve fiyatlandırma ister misiniz?</h2>
+        <p>İhtiyaçlarınızı analiz edelim, firmanıza en uygun modülleri ve donanımları birlikte belirleyelim.</p>
+      </div>
+      <div class="banner-action">
+        <button [routerLink]="['/contact']" [queryParams]="{ subject: 'sektorel-teklif' }" class="btn btn-primary hover-lift">
+          <img src="assets/logos/sektorel-teklif-isteyin-logo.png" alt="Teklif İste" class="btn-icon" loading="lazy" style="width: 20px; height: 20px;" /> Sektörel Teklif İsteyin
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>

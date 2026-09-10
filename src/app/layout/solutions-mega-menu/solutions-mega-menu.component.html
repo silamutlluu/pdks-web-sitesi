@@ -1,0 +1,31 @@
+<div class="mega-menu-wrapper" (click)="$event.stopPropagation()">
+  <div class="mega-menu-content" style="padding: 1.5rem;">
+    
+    <div class="categories-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+      <div class="features-list">
+        <a *ngFor="let sect of sectors.slice(0,3)" [routerLink]="['/solutions']" [fragment]="sect.linkUrl" class="feature-item">
+          <div class="feature-icon" [style.color]="getColor(sect.badgeColor)">
+            <lucide-angular [name]="sect.iconKey"></lucide-angular>
+          </div>
+          <div class="feature-text">
+            <span class="feature-title">{{ sect.title }}</span>
+            <span class="feature-desc">{{ sect.description }}</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="features-list">
+        <a *ngFor="let sect of sectors.slice(3)" [routerLink]="['/solutions']" [fragment]="sect.linkUrl" class="feature-item">
+          <div class="feature-icon" [style.color]="getColor(sect.badgeColor)">
+            <lucide-angular [name]="sect.iconKey"></lucide-angular>
+          </div>
+          <div class="feature-text">
+            <span class="feature-title">{{ sect.title }}</span>
+            <span class="feature-desc">{{ sect.description }}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

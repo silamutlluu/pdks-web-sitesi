@@ -1,0 +1,64 @@
+<div class="assignments-container">
+  <div class="header">
+    <h1>Yetki ve Cihaz Atama</h1>
+    <p>Personelleri cihazlara yetki gruplarıyla birlikte toplu olarak atayın.</p>
+  </div>
+
+  <div class="content">
+    <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()" class="assignment-form glass-panel">
+      
+      <!-- Cihaz Seçimi -->
+      <div class="form-group">
+        <label for="deviceId">Cihaz Seçin</label>
+        <select id="deviceId" formControlName="deviceId" class="form-control">
+          <option value="">-- Cihaz Seçin --</option>
+          <option *ngFor="let device of devices" [value]="device.id">
+            {{ device.name }} ({{ device.ipAddress }})
+          </option>
+        </select>
+        <div class="hint">Atama yapacağınız hedef cihazı seçin.</div>
+      </div>
+
+      <!-- Personel Seçimi (Basit çoklu seçim) -->
+      <div class="form-group">
+        <label for="employeeIds">Personel(ler) Seçin</label>
+        <select id="employeeIds" formControlName="employeeIds" multiple class="form-control multi-select">
+          <option value="1">Ahmet Yılmaz (Yazılım)</option>
+          <option value="2">Ayşe Demir (İK)</option>
+          <option value="3">Mehmet Kaya (Muhasebe)</option>
+        </select>
+        <div class="hint">Birden fazla personel seçmek için CTRL/CMD tuşuna basılı tutun.</div>
+      </div>
+
+      <!-- Yetki Grubu -->
+      <div class="form-group" *ngIf="assignmentForm.get('deviceId')?.value">
+        <label for="accessGroupId">Yetki Grubu (Opsiyonel)</label>
+        <select id="accessGroupId" formControlName="accessGroupId" class="form-control">
+          <option value="">-- Varsayılan --</option>
+          <option *ngFor="let group of accessGroups" [value]="group.id">
+            {{ group.name }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Zaman Dilimi -->
+      <div class="form-group" *ngIf="assignmentForm.get('deviceId')?.value">
+        <label for="timeZoneProfileId">Zaman Dilimi (Opsiyonel)</label>
+        <select id="timeZoneProfileId" formControlName="timeZoneProfileId" class="form-control">
+          <option value="">-- Varsayılan --</option>
+          <option *ngFor="let tz of timeZones" [value]="tz.id">
+            {{ tz.name }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Aksiyon -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="assignmentForm.invalid || isSubmitting">
+          <span *ngIf="isSubmitting" class="spinner"></span>
+          <span *ngIf="!isSubmitting">Atamayı Başlat</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

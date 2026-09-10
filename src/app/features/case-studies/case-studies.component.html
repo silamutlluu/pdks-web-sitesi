@@ -1,0 +1,75 @@
+<div class="case-studies-page">
+  
+  <!-- Hero Section -->
+  <section class="case-studies-hero container">
+    <div class="hero-content">
+      <h1 class="page-title">Sektör Liderlerinin Smart PDKS Başarı Hikayeleri</h1>
+      <p class="page-subtitle">Smart PDKS sistemimiz ile operasyonel verimliliklerini artıran, maliyetlerini düşüren şirketlerin gerçek verilerle desteklenmiş hikayelerini inceleyin.</p>
+    </div>
+  </section>
+
+  <!-- Metrics Overview -->
+  <section class="global-metrics container">
+    <div class="metric-card glass-panel">
+      <div class="number">2.5M+</div>
+      <div class="label">Günlük İşlenen Log</div>
+    </div>
+    <div class="metric-card glass-panel">
+      <div class="number">%99.9</div>
+      <div class="label">Sistem Uptime</div>
+    </div>
+    <div class="metric-card glass-panel">
+      <div class="number">10+</div>
+      <div class="label">Farklı Ülkede Kullanım</div>
+    </div>
+    <div class="metric-card glass-panel">
+      <div class="number">%40</div>
+      <div class="label">Ortalama IK Zaman Tasarrufu</div>
+    </div>
+  </section>
+
+  <!-- Case Studies Grid -->
+  <section class="case-grid container bento-container">
+    
+    <div *ngIf="isLoading" class="loading-state" style="text-align: center; padding: 3rem; grid-column: 1 / -1;">
+      Referanslar yükleniyor...
+    </div>
+
+    <div *ngIf="error" class="error-state" style="text-align: center; padding: 3rem; color: #ef4444; grid-column: 1 / -1;">
+      {{ error }}
+    </div>
+
+    <ng-container *ngIf="!isLoading && !error">
+      <div *ngFor="let item of testimonials" class="case-card bento-item glass-panel hover-lift">
+        <div class="case-header" style="display: flex; align-items: center; justify-content: space-between;">
+          <span class="sector-badge"><lucide-angular name="building"></lucide-angular> Müşteri Hikayesi</span>
+          <img *ngIf="item.logoUrl" [src]="item.logoUrl" [alt]="item.companyName + ' Logosu'" class="company-logo" style="max-height: 40px; border-radius: 4px;" />
+        </div>
+        <h3 class="case-title" style="margin-top: 1rem;">{{ item.companyName }}</h3>
+        <p class="case-desc">"{{ item.quote }}"</p>
+        <div class="case-result" style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+          <strong>{{ item.personName }}</strong><br/>
+          <small style="color: #94a3b8;">{{ item.personTitle }}</small>
+        </div>
+        <a *ngIf="item.caseStudyUrl" [href]="item.caseStudyUrl" class="btn btn-ghost mt-2" style="font-size: 0.85rem; padding: 0.5rem 0;">Vakayı İncele &rarr;</a>
+      </div>
+    </ng-container>
+
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner container">
+    <div class="banner-inner glass-panel">
+      <div class="banner-content">
+        <h2>Sizin için neler yapabileceğimizi görmek ister misiniz?</h2>
+        <p>Geniş referans portföyümüzü inceleyin veya sektörünüze en uygun vaka çalışması için uzmanlarımızla görüşün.</p>
+      </div>
+      <div class="banner-action">
+        <button class="btn btn-primary hover-lift">
+          <lucide-angular name="users"></lucide-angular> Tüm Referansları İnceleyin
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>

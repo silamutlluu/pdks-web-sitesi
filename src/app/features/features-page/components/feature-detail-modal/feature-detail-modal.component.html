@@ -1,0 +1,59 @@
+<div class="modal-backdrop" [class.open]="isOpen" (click)="onClose()">
+  <div class="modal-container glass-panel" [class.open]="isOpen" (click)="onContentClick($event)" *ngIf="feature">
+    
+    <button class="close-btn" (click)="onClose()" aria-label="Kapat">
+      <lucide-angular name="x"></lucide-angular>
+    </button>
+    
+    <div class="modal-body">
+      <!-- Modal Header (Icon + Title) -->
+      <div class="modal-header">
+        <div class="feature-icon-wrapper">
+          <lucide-angular [name]="feature.icon"></lucide-angular>
+        </div>
+        <div class="title-wrapper">
+          <span class="category-badge">{{ feature.category | uppercase }}</span>
+          <h2>{{ feature.title }}</h2>
+        </div>
+      </div>
+      
+      <!-- Visual Area -->
+      <div class="visual-area">
+        <ng-container *ngIf="feature.imageUrl; else fallbackVisual">
+          <img [src]="feature.imageUrl" [alt]="feature.title" class="feature-image" />
+        </ng-container>
+        <ng-template #fallbackVisual>
+          <div class="fallback-visual">
+            <div class="svg-container" [innerHTML]="feature.fallbackSvg" *ngIf="feature.fallbackSvg"></div>
+            <lucide-angular *ngIf="!feature.fallbackSvg" [name]="feature.icon" class="large-icon"></lucide-angular>
+          </div>
+        </ng-template>
+      </div>
+      
+      <!-- Content Area -->
+      <div class="content-area">
+        <p class="full-description">{{ feature.fullDescription }}</p>
+        
+        <div class="bullet-points" *ngIf="feature.bulletPoints && feature.bulletPoints.length">
+          <h3>Öne Çıkan Yetenekler</h3>
+          <ul>
+            <li *ngFor="let point of feature.bulletPoints">
+              <lucide-angular name="check-circle-2" class="bullet-icon"></lucide-angular>
+              <span>{{ point }}</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="tags" *ngIf="feature.tags && feature.tags.length">
+          <span *ngFor="let tag of feature.tags" class="tag">{{ tag }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="onClose()">Kapat</button>
+      <a routerLink="/contact" class="btn btn-primary" (click)="onClose()">Detaylı Bilgi Al</a>
+    </div>
+  </div>
+</div>

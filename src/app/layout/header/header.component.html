@@ -1,0 +1,40 @@
+<header class="sticky-header glass-panel">
+  <div class="header-container">
+    <!-- Hamburger: Sadece küçük ekranlarda logonun solunda görünür -->
+    <button class="mobile-toggle" (click)="toggleMobileNav()" aria-label="Menü">
+      <lucide-angular name="menu"></lucide-angular>
+    </button>
+    <div class="logo logo-container" routerLink="/" (click)="scrollToTop()" title="Anasayfaya Dön" style="cursor: pointer; outline: none !important; -webkit-tap-highlight-color: transparent; background: transparent !important; box-shadow: none !important; border: none !important;" tabindex="-1">
+      <img src="assets/logos/pdks_round_logo_1786523920286.png" alt="PDKS Logo" class="header-logo-img" style="border-radius: 50%;" />
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <span class="logo-text">Smart PDKS</span>
+        <span class="logo-subtitle">Personel Devam Kontrol Sistemi</span>
+      </div>
+    </div>
+    
+    <nav class="desktop-nav">
+      <ul>
+        <li class="has-dropdown" (mouseenter)="isMegaMenuOpen = true" (mouseleave)="isMegaMenuOpen = false">
+          <a routerLink="/features" routerLinkActive="active" (click)="toggleMegaMenu($event)">Özellikler <lucide-angular name="chevron-down" style="width: 14px; height: 14px; margin-left: 2px; margin-bottom: -2px;"></lucide-angular></a>
+          <div class="dropdown-menu-container" [class.open]="isMegaMenuOpen">
+            <app-features-mega-menu></app-features-mega-menu>
+          </div>
+        </li>
+        <li><a routerLink="/hardware" routerLinkActive="active">Donanım</a></li>
+        <li class="has-dropdown" (mouseenter)="isSolutionsMenuOpen = true" (mouseleave)="isSolutionsMenuOpen = false">
+          <a routerLink="/solutions" routerLinkActive="active" (click)="toggleSolutionsMenu($event)">Sektörler <lucide-angular name="chevron-down" style="width: 14px; height: 14px; margin-left: 2px; margin-bottom: -2px;"></lucide-angular></a>
+          <div class="dropdown-menu-container" [class.open]="isSolutionsMenuOpen">
+            <app-solutions-mega-menu></app-solutions-mega-menu>
+          </div>
+        </li>
+        <li><a routerLink="/pricing" routerLinkActive="active">Fiyatlandırma</a></li>
+        <li><a routerLink="/security" routerLinkActive="active">Güvenlik</a></li>
+      </ul>
+    </nav>
+    
+    <div class="header-actions">
+      <!-- Birincil CTA (F4'te de bahsediliyor) -->
+      <button routerLink="/contact" class="btn btn-primary hover-lift">Ürün Tanıtımı İsteyin</button>
+    </div>
+  </div>
+</header>

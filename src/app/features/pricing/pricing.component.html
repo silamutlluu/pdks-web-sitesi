@@ -1,0 +1,137 @@
+<div class="pricing-page">
+  
+  <!-- Hero Section -->
+  <section class="pricing-hero container">
+    <div class="hero-content">
+      <h1 class="page-title">İşletmenizin Ölçeğine Uygun Fiyatlandırma Planları</h1>
+      <p class="page-subtitle">Her ölçekteki işletme için özenle hazırlanmış paketler. Sürpriz ücret yok, ihtiyacınıza en uygun planı seçin.</p>
+    </div>
+  </section>
+
+  <!-- Billing Toggle -->
+  <div class="billing-toggle-wrapper container">
+    <div class="billing-toggle glass-panel">
+      <span class="toggle-label" [class.active]="!isYearly">Aylık Ödeme</span>
+      <button class="toggle-btn" [class.yearly]="isYearly" (click)="toggleBillingPeriod()">
+        <div class="toggle-knob"></div>
+      </button>
+      <span class="toggle-label" [class.active]="isYearly">
+        Yıllık Ödeme 
+        <span class="discount-badge">%20 İndirim</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Pricing Cards -->
+  <section class="pricing-cards container">
+    
+    <!-- Starter -->
+    <div class="pricing-card glass-panel hover-lift" 
+         [class.selected]="selectedPackageId === 'starter'"
+         (click)="selectPackage('starter')">
+      <div class="card-header">
+        <h3>Başlangıç</h3>
+        <p class="employee-limit">1 - 50 Çalışan</p>
+      </div>
+      <div class="card-price">
+        <span class="amount">{{ isYearly ? '1.499' : '1.875' }}</span>
+        <span class="currency"> ₺</span>
+        <span class="period">/ay</span>
+      </div>
+      <p class="price-desc" *ngIf="isYearly">Yıllık ödemelerde %20 indirim avantajıyla.</p>
+      <p class="price-desc" *ngIf="!isYearly">Aylık faturalandırma seçeneği.</p>
+      <ul class="feature-list">
+        <li><lucide-angular name="check"></lucide-angular> Temel Puantaj Yönetimi</li>
+        <li><lucide-angular name="check"></lucide-angular> İzin & Devamsızlık Takibi</li>
+        <li><lucide-angular name="check"></lucide-angular> Standart Raporlama</li>
+        <li><lucide-angular name="check"></lucide-angular> E-posta Desteği</li>
+      </ul>
+    </div>
+
+    <!-- Professional (Highlighted) -->
+    <div class="pricing-card glass-panel hover-lift popular"
+         [class.selected]="selectedPackageId === 'professional'"
+         (click)="selectPackage('professional')">
+      <div class="popular-badge">En Çok Tercih Edilen</div>
+      <div class="card-header">
+        <h3>Profesyonel</h3>
+        <p class="employee-limit">51 - 250 Çalışan</p>
+      </div>
+      <div class="card-price">
+        <span class="amount">{{ isYearly ? '3.600' : '4.500' }}</span>
+        <span class="currency"> ₺</span>
+        <span class="period">/ay</span>
+      </div>
+      <p class="price-desc" *ngIf="isYearly">Yıllık ödemelerde %20 indirim avantajıyla.</p>
+      <p class="price-desc" *ngIf="!isYearly">Aylık faturalandırma seçeneği.</p>
+      <ul class="feature-list">
+        <li><lucide-angular name="check"></lucide-angular> Başlangıç paketindeki her şey</li>
+        <li><lucide-angular name="check"></lucide-angular> Gelişmiş Vardiya & Rotasyon</li>
+        <li><lucide-angular name="check"></lucide-angular> Donanım Entegrasyonu (API)</li>
+        <li><lucide-angular name="check"></lucide-angular> AI Destekli Anomali Tespiti</li>
+        <li><lucide-angular name="check"></lucide-angular> Öncelikli Telefon Desteği</li>
+      </ul>
+    </div>
+
+    <!-- Advanced -->
+    <div class="pricing-card glass-panel hover-lift"
+         [class.selected]="selectedPackageId === 'advanced'"
+         (click)="selectPackage('advanced')">
+      <div class="card-header">
+        <h3>İleri Seviye</h3>
+        <p class="employee-limit">251 - 500 Çalışan</p>
+      </div>
+      <div class="card-price">
+        <span class="amount">{{ isYearly ? '6.800' : '8.500' }}</span>
+        <span class="currency"> ₺</span>
+        <span class="period">/ay</span>
+      </div>
+      <p class="price-desc" *ngIf="isYearly">Yıllık ödemelerde %20 indirim avantajıyla.</p>
+      <p class="price-desc" *ngIf="!isYearly">Aylık faturalandırma seçeneği.</p>
+      <ul class="feature-list">
+        <li><lucide-angular name="check"></lucide-angular> Profesyonel paketindeki her şey</li>
+        <li><lucide-angular name="check"></lucide-angular> Çoklu Lokasyon Merkezi Yönetim</li>
+        <li><lucide-angular name="check"></lucide-angular> Personel Maliyet Analizleri</li>
+        <li><lucide-angular name="check"></lucide-angular> VIP Müşteri Temsilcisi</li>
+      </ul>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="pricing-card glass-panel hover-lift"
+         [class.selected]="selectedPackageId === 'enterprise'"
+         (click)="selectPackage('enterprise')">
+      <div class="card-header">
+        <h3>Kurumsal</h3>
+        <p class="employee-limit">500+ Çalışan</p>
+      </div>
+      <div class="card-price custom">
+        <span class="amount">Özel Teklif</span>
+      </div>
+      <p class="price-desc">Büyük ölçekli operasyonlar için terzi işi çözümler.</p>
+      <ul class="feature-list">
+        <li><lucide-angular name="check"></lucide-angular> Profesyonel paketindeki her şey</li>
+        <li><lucide-angular name="check"></lucide-angular> ERP/SAP Çift Yönlü Entegrasyon</li>
+        <li><lucide-angular name="check"></lucide-angular> Dedicated Müşteri Temsilcisi</li>
+        <li><lucide-angular name="check"></lucide-angular> Özelleştirilmiş Geliştirme</li>
+        <li><lucide-angular name="check"></lucide-angular> SLA Garantisi</li>
+      </ul>
+    </div>
+    
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner container">
+    <div class="banner-inner glass-panel">
+      <div class="banner-content">
+        <h2>Size en uygun paketi birlikte belirleyelim.</h2>
+        <p>İhtiyaçlarınızı analiz edip, çalışan sayınıza ve modül gereksinimlerinize özel detaylı bir fiyat teklifi hazırlıyoruz.</p>
+      </div>
+      <div class="banner-action">
+        <button [routerLink]="['/contact']" [queryParams]="{ subject: 'fiyat-teklifi' }" class="btn btn-primary hover-lift">
+          <img src="assets/logos/fiyat-teklifi-formu-logo.png" alt="Fiyat Teklifi" class="btn-icon" loading="lazy" style="width: 20px; height: 20px;" /> Fiyat Teklifi Formunu Doldurun
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>

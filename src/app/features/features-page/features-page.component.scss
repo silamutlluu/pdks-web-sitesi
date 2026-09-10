@@ -1,0 +1,565 @@
+@import '../../../styles/variables';
+
+.features-page {
+  padding-bottom: 4rem;
+}
+
+// Hero Section
+.features-hero {
+  padding: 6rem 0 4rem;
+  text-align: center;
+  
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    color: $color-accent-primary;
+    background: rgba(56, 189, 248, 0.1);
+    
+    lucide-angular {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .page-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin: 0;
+    color: $color-text-main;
+    
+    @media (max-width: 768px) {
+      font-size: 2.2rem;
+    }
+  }
+
+  .page-subtitle {
+    font-size: 1.25rem;
+    color: $color-text-muted;
+    line-height: 1.6;
+    margin: 0;
+    
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+  }
+
+  .hero-orbit {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    margin: 4rem auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .orbit-container {
+      position: relative;
+      width: 520px;
+      height: 520px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.paused {
+        .orbit-ring, .satellite-wrapper, .satellite-content {
+          animation-play-state: paused !important;
+        }
+      }
+
+      .orbit-center {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        background: radial-gradient(circle, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+        border: 2px solid rgba(56, 189, 248, 0.3);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+        box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
+
+        .core-icon {
+          width: 32px;
+          height: 32px;
+          color: #38bdf8;
+          margin-bottom: 0.5rem;
+        }
+
+        .center-text {
+          text-align: center;
+          
+          h4 {
+            font-size: 1rem;
+            color: #f8fafc;
+            margin: 0 0 0.25rem 0;
+            font-weight: 600;
+          }
+          
+          p {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.2;
+            padding: 0 1rem;
+          }
+        }
+
+        .core-glow {
+          position: absolute;
+          inset: -20px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+          z-index: -1;
+          animation: pulse-glow 3s infinite alternate;
+        }
+      }
+
+      .orbit-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+        
+        &.ring-1 {
+          width: 280px;
+          height: 280px;
+          animation: spin 30s linear infinite;
+        }
+        
+        &.ring-2 {
+          width: 400px;
+          height: 400px;
+          animation: spin 45s linear infinite reverse;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        &.ring-3 {
+          width: 520px;
+          height: 520px;
+          animation: spin 60s linear infinite;
+          border: 1px dashed rgba(255, 255, 255, 0.08);
+        }
+      }
+
+      .satellite-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        pointer-events: none;
+        animation-name: orbit;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        
+        &.ring-size-1 { width: 280px; height: 280px; }
+        &.ring-size-2 { width: 400px; height: 400px; }
+        &.ring-size-3 { width: 520px; height: 520px; }
+
+        .satellite-content {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #1e293b;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #94a3b8;
+          cursor: pointer;
+          pointer-events: auto;
+          transition: all 0.3s ease;
+          animation-name: counter-spin;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          
+          &.content-ring-1 { 
+            width: 36px; height: 36px; top: -18px; 
+            lucide-angular { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; } 
+          }
+          &.content-ring-2 { 
+            width: 44px; height: 44px; top: -22px; 
+            lucide-angular { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; } 
+          }
+          &.content-ring-3 { 
+            width: 48px; height: 48px; top: -24px; 
+            lucide-angular { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; } 
+          }
+          
+          &:hover {
+            color: #38bdf8;
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+            transform: translateX(-50%) scale(1.1);
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes counter-spin {
+  from { transform: translateX(-50%) rotate(360deg); }
+  to { transform: translateX(-50%) rotate(0deg); }
+}
+
+@keyframes pulse-glow {
+  from { opacity: 0.5; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1.05); }
+}
+
+// Controls (Filter & Search)
+.controls-section {
+  position: sticky;
+  top: 76px; // Header height
+  z-index: 40;
+  margin-bottom: 3rem;
+  
+  .controls-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    gap: 2rem;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+      padding: 1rem;
+    }
+  }
+
+  .categories-scroll {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    margin-bottom: -0.5rem;
+    
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+    }
+  }
+
+  .category-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: $color-text-muted;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1;
+    
+    .btn-icon {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: $color-text-main;
+    }
+
+    &.active {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.3);
+      color: $color-accent-primary;
+    }
+  }
+
+  .search-box {
+    position: relative;
+    width: 300px;
+    flex-shrink: 0;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: $color-text-muted;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      color: $color-text-main;
+      font-family: inherit;
+      transition: all 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $color-accent-primary;
+        background: rgba(255, 255, 255, 0.05);
+      }
+      
+      &::placeholder {
+        color: $color-text-muted;
+      }
+    }
+  }
+}
+
+// Grid Section
+.grid-section {
+  min-height: 400px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 1.5rem;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  
+  .empty-icon {
+    width: 48px;
+    height: 48px;
+    color: $color-text-muted;
+    margin-bottom: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: $color-text-muted;
+    margin-bottom: 1.5rem;
+    max-width: 400px;
+  }
+}
+
+.category-group-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .category-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    
+    lucide-angular {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .category-group-title {
+    font-size: 1.5rem;
+    color: $color-text-main;
+    margin: 0;
+    white-space: nowrap;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .category-divider {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.module-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  
+  .feature-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+  
+  .feature-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    lucide-angular {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  .details-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: $color-text-muted;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    
+    lucide-angular {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+  }
+  
+  &:hover .details-btn {
+    background: $color-accent-primary;
+    border-color: $color-accent-primary;
+    color: #fff;
+    transform: rotate(45deg);
+  }
+  
+  .feature-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: $color-text-main;
+  }
+  
+  .feature-desc {
+    color: $color-text-muted;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+  
+  .feature-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      color: $color-text-muted;
+    }
+  }
+}
+
+// Banner
+.cta-banner {
+  margin-top: 4rem;
+
+  .banner-inner {
+    padding: 3rem;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.6));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+    }
+  }
+
+  .banner-content {
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: $color-text-main;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      color: $color-text-muted;
+      margin: 0;
+      max-width: 500px;
+    }
+  }
+}
